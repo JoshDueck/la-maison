@@ -1,0 +1,21 @@
+.img{
+	height:225px;
+	width:225px;
+	position:center;
+}
+.text{
+	font-family:Times New Roman;
+}
+.jump{
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-gap: 10px;
+}
+.shadow{
+	padding:10px;
+}
+
+.shadow:hover{
+	background-color:#ddd;	
+	padding:10px;
+}
