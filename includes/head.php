@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="includes/head.css" type="text/css" media="screen" />
-<link rel="stylesheet" href="includes/cat.css" type="text/css" media="screen" />
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
