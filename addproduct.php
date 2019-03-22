@@ -192,6 +192,6 @@ if (isset($_SESSION['username'])) {                             LOGIN SESSION
 include('includes/footer.html');
 ?>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="includes/update products.js"></script>
+	<script src="includes/addproduct.js"></script>
 </body>
 </html>
