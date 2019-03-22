@@ -6,6 +6,11 @@
 .text{
 	font-family:Times New Roman;
 }
+
+table {
+	margin: auto;
+}
+
 .jump{
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
@@ -13,6 +18,7 @@
 }
 .shadow{
 	padding:10px;
+	width: 250px;;
 }
 
 .shadow:hover{

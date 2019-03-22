@@ -4,10 +4,43 @@
 <head>
 </head>
 <body>
+<?php
+
+// connect to database
+include("mysqli_connect.php"); // connection string is $dbc
+
+// run a query
+$cat_query = "SELECT * FROM CATEGORY where parent_id IS NULL;";
+$cat_rows = mysqli_query($dbc, $cat_query);
+
+echo "<div class='navbar'>"; // start navbar
+
+// category loop
+
+while($cat_row=mysqli_fetch_array($cat_rows, MYSQLI_ASSOC)){
+	// display each cat
+	echo "<div class='subnav'>";
+	echo "<button class='subnavbtn'>".$cat_row['category_name']."<i class='fa fa-caret-down'></i></button>";
+	echo "<div class='subnav-content'>";
+	// query the subcategories
+	$subcat_query = "SELECT * FROM CATEGORY where parent_id =".$cat_row['category_id'].";";
+	$subcat_rows = mysqli_query($dbc, $subcat_query);
+	// display the category's subcategories
+	while($subcat_row=mysqli_fetch_array($subcat_rows, MYSQLI_ASSOC)){
+		echo "<a href='#sub1.1'>".$subcat_row['category_name']."</a>";
+	}
+	echo "</div>"; // end of subnav-content div
+	echo "</div>"; // end of subnav div
+}
+
+echo "";
+echo "";
+echo "</div>"; // end of navbar div
 
 
 
-
+?>
+<!--
 <div class="navbar">
   <div class="subnav">
     <button class="subnavbtn">Category 1 <i class="fa fa-caret-down"></i></button>
@@ -56,9 +89,10 @@
       <a href="#sub5.2">Sub 5.2</a>
       <a href="#sub5.3">Sub 5.3</a>
     </div>
-  </div> 	
+  </div> 
+	
+	
 </div>
-
-
+-->
 </body>
 </html>
