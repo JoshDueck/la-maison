@@ -10,7 +10,6 @@ include("includes/head.php"); // inserts header at the top
 include("mysqli_connect.php"); // connection string is $dbc
 
 
-
 $category_name = $_GET['category_name'];
 
 if ($category_name == null){
@@ -43,8 +42,8 @@ if ($category_name == null){
 		<br>";
 }
 
-
 // run a query based on category
+
 $prod_query = 
 "SELECT product_image, product_name, product_price, product_description, product_id, category_id, category_name
 FROM PRODUCT p, PRODCAT pc, CATEGORY c
@@ -52,6 +51,7 @@ WHERE p.product_id = pc.PRODUCT_product_id
 AND c.category_id = pc.CATEGORY_category_id
 AND category_name = '$category_name'";
 $prod_rows = mysqli_query($dbc, $prod_query);
+
 echo "<br>
 	<br>
 	<table>
