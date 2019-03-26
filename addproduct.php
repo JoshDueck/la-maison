@@ -61,7 +61,7 @@ include("mysqli_connect.php");
 		$prodimage = "product_image/{$_FILES['prodimage']['name']}";
 		
 		// Try to move the uploaded file:
-	if (move_uploaded_file ($_FILES['prodimage']['tmp_name'], "/home/student/ics19901/product_image/{$_FILES['prodimage']['name']}")) {
+	if (move_uploaded_file ($_FILES['prodimage']['tmp_name'], "product_image/{$_FILES['prodimage']['name']}")) {
 	
 		print '<p>Your file has been uploaded.</p>';
 	
