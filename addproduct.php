@@ -1,14 +1,13 @@
 <html>
 <head>
 <title>Add A Product</title>
-<link rel="stylesheet" href="includes/update products m.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="includes/addproduct.css" type="text/css" media="screen" />
 </head>
 <body>
 <?php
 //session_start();
 include("includes/head.php");
-//include('includes/update products m.html'); 
+
 include("mysqli_connect.php");
 
 	$q = "select * from PRODUCT;";
