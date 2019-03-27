@@ -1,13 +1,14 @@
 <html>
 <head>
 <title>Add A Product</title>
+<link rel="stylesheet" href="includes/update products m.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="includes/addproduct.css" type="text/css" media="screen" />
 </head>
 <body>
 <?php
 //session_start();
 include("includes/head.php");
-
+//include('includes/update products m.html'); 
 include("mysqli_connect.php");
 
 	$q = "select * from PRODUCT;";
@@ -50,8 +51,6 @@ include("mysqli_connect.php");
 	echo 		"</div>"; // end of class products div
 	echo "</div>"; // end of class products-container div
 	
-
-
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$prodname = $_POST['prodname'];
 		$prodcat = $_POST['prodcat'];
@@ -60,8 +59,9 @@ include("mysqli_connect.php");
 		$proddesc = $_POST['proddesc'];
 		$prodimage = $_POST['prodimage'];
 		
+		
 		// inserting data from add product
-		$query = "insert into PRODUCT (product_name, product_image, product_price, product_description) values ('$prodname', '$prodimage', $prodprice, '$proddesc');";
+		$query = "insert into PRODUCT (product_name,  product_price, product_description) values ('$prodname', $prodprice, '$proddesc');";
 		
 		// check if there was an error  adding in a product
 		if (!mysqli_query($dbc, $query)) {
@@ -75,9 +75,70 @@ include("mysqli_connect.php");
 			if ($result){
 				$row = mysqli_fetch_array ($result);
 				$product_id = $row['last_insert_id()'];
-			}
-			
+				
+				// insert image into database
+				
+				$target_dir = "product_image/";
+				$target_file = $target_dir . basename($_FILES["prodimage"]["name"]);
+				$uploadOk = 1;
+				$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+				
+				// Check if image file is a actual image or fake image
+				$check = getimagesize($_FILES["prodimage"]["tmp_name"]);
+				if($check != false) {
+					echo "File is an image - " . $check["mime"] . ".";
+					$uploadOk = 1;
+				} else {
+					echo "File is not an image.";
+					$uploadOk = 0;
+				}
+				
+				
+				// Check if file already exists
+				if (file_exists($target_file)) {
+					echo "Sorry, file already exists.";
+					$uploadOk = 0;
+				}
+				// Check file size
+				if ($_FILES["prodimage"]["size"] > 500000) {
+					echo "Sorry, your file is too large.";
+					$uploadOk = 0;
+				}
+				// Allow certain file formats
+				if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+				&& $imageFileType != "gif" ) {
+					echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+					$uploadOk = 0;
+				}
+				
+				// Check if $uploadOk is set to 0 by an error
+				if ($uploadOk == 0) {
+					echo "Sorry, your file was not uploaded.";
+				// if everything is ok, try to upload file
+				} else {
+					if (move_uploaded_file($_FILES["prodimage"]["tmp_name"], $target_file)) {
+						echo "The file ". basename( $_FILES["prodimage"]["name"]). " has been uploaded.";
+					} else {
+						echo "Sorry, there was an error uploading your file.";
+					}
+				}
+				
+				if(is_uploaded_file($_FILES['user_file']['tmp_name'])){
+					echo "It is in the temp folder";
+				}
+				
+				$imgname=$_FILES["prodimage"]["name"];
+				$imgpath="product_image/$imgname";
+		
+				// inserting image into database
+				$query = "update PRODUCT set product_image = '$imgpath' where product_id = $product_id;";
+				
+				// run the add image query
+				mysqli_query($dbc, $query);
+			}		
 		}
+		
+		
 		
 		// linking a product to a category
 		$querycat = "insert into PRODCAT(CATEGORY_category_id, PRODUCT_product_id) values ($prodcat, $product_id);";
@@ -115,10 +176,10 @@ if (isset($_SESSION['username'])) {                             LOGIN SESSION
 ?>
 
 <div id="addproduct" class="modal">
-<form method="POST" action="addproduct.php" class="modal-content">
+<form method="POST" action="addproduct.php" class="modal-content" enctype="multipart/form-data">
 	Product Name:<br>
 	
-	<input type="text" name="prodname">
+	<input type="text" name="prodname" id="prodname">
 	<br>
 	<br>
 	Product Category:<br>
@@ -168,18 +229,18 @@ if (isset($_SESSION['username'])) {                             LOGIN SESSION
 	<br>
 	
 	Product Price:<br>
-	<input type="text" name="prodprice">
+	<input type="number" name="prodprice" id="prodprice">
 	<br>
 	<br>
 	Product Image:<br>
-	<input type="text" name="prodimage">
+	<input type="file" name="prodimage" id="prodimage" accept="image/*" />
 	<br>
 	<br>
 	Product Desciption:<br>
-	<textarea name="proddesc" rows="20" cols="100" class="textarea"></textarea>
+	<textarea name="proddesc" rows="20" cols="100" class="textarea" id="proddesc"></textarea>
 	<br>
 	<br>
-	<input type="submit" value="Submit">
+	<input type="submit" value="Submit" id="submit">
 	<br>
 	<br>
 </form> 

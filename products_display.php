@@ -28,11 +28,12 @@ if ($category_name == null){
 
 	while($prod_row=mysqli_fetch_array($prod_rows, MYSQLI_ASSOC)){
 		echo "<td class=\"shadow\">
-				<a href=\"#\">
+				<a href=\"http://deepblue.cs.camosun.bc.ca/~ics19901/product_details.php?product_id=".$prod_row['product_id']."\">
 				<img src=\"".$prod_row['product_image']."\"  class=\"img\" />
 				</a>
 				<h4 class=\"text\"><i>".$prod_row['product_name']."</i></h4>
 				<h4 class=\"text\"><i>\$".$prod_row['product_price']."</i></h4>
+				
 		</td>
 	";
 	}
@@ -61,11 +62,12 @@ echo "<br>
 
 while($prod_row=mysqli_fetch_array($prod_rows, MYSQLI_ASSOC)){
 	echo "<td class=\"shadow\">
-			<a href=\"#\">
+			<a href=\"http://deepblue.cs.camosun.bc.ca/~ics19901/product_details.php?product_id=".$prod_row['product_id']."\">
 			<img src=\"{$prod_row['product_image']}\"  class=\"img\" />
 			</a>
 			<h4 class=\"text\"><i>".$prod_row['product_name']."</i></h4>
 			<h4 class=\"text\"><i>\$".$prod_row['product_price']."</i></h4>
+			
 	</td>
 ";
 }

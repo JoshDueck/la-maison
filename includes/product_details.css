@@ -1,0 +1,61 @@
+
+article{
+	width: 80%;
+	margin: auto;
+}
+
+#img_container{
+	display: inline-block;
+	margin: 10px;
+}
+
+img {
+	width: 500px;
+	
+}
+
+#details_container {
+	display: inline-block;
+	width: 400px;
+	vertical-align: top;
+}
+
+#name_container{
+	display: inline-block;
+	
+}
+
+
+#price_container {
+	
+}
+
+#buttons_container input, button{
+	font-size: 20px;
+}
+
+#added_to_cart{
+	display: none;
+}
+
+#added_to_cart input{
+	margin-top: 20px;
+}
+
+#added_to_cart #quantity{
+	width: 50px;
+}
+
+/* turn off number input spinners */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+
+
+#description_container{
+	width: 800px;
+	margin-top: 50px;
+}
