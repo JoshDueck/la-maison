@@ -4,6 +4,14 @@
 </head><body><br>
 
 <?php
+session_start();
+
+if (isset($_SESSION['username'])) {
+	echo "You are logged in";
+} else {
+	echo "NOT LOGGED IN";
+}
+
 include("includes/head.php"); // inserts header at the top
 
 // connect to database
