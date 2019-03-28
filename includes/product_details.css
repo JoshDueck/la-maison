@@ -2,16 +2,35 @@
 article{
 	width: 80%;
 	margin: auto;
+	margin-top:10px;
 }
+
+#failure_message{
+	background-color:#ff7777;
+	padding: 10px;
+	border-radius: 10px;
+	max-width: 1200px;
+	line-height: 25px;
+}
+
+#success_message {
+	background-color:#99ff99;
+	padding: 10px;
+	border-radius: 10px;
+	max-width: 1200px;
+	line-height: 25px;
+}
+
 
 #img_container{
 	display: inline-block;
 	margin: 20px;
 }
 
-img {
+
+img { 
 	width: 500px;
-	
+	border:1px solid #cccccc;
 }
 
 #details_container {
@@ -52,8 +71,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 
-
 #description_container{
+	display: block;
 	width: 800px;
 	margin-top: 50px;
 }
