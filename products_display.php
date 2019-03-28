@@ -1,17 +1,27 @@
-<html>
-<link rel="stylesheet" href="includes/products_display.css" type="text/css" media="screen" />
-<head>
-</head><body><br>
-
 <?php
-session_start();
 
-if (isset($_SESSION['username'])) {
+session_start();
+/*
+$_SESSION['test'] = "testvariable";
+
+echo session_id();
+echo '<pre>';
+var_dump($_SESSION); ------------------------------------------------ DEBUGGING CODE
+echo '</pre>';
+
+
+if (isset($_SESSION['customer_id'])) {
 	echo "You are logged in";
 } else {
 	echo "NOT LOGGED IN";
-}
+} */
+?>
+<html>
+<link rel="stylesheet" href="includes/products_display.css" type="text/css" media="screen" />
+<head>
+</head><body>
 
+<?php
 include("includes/head.php"); // inserts header at the top
 
 // connect to database
