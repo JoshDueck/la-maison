@@ -1,7 +1,25 @@
+<?php
+
+session_start();
+/*
+$_SESSION['test'] = "testvariable";
+
+echo session_id();
+echo '<pre>';
+var_dump($_SESSION); ------------------------------------------------ DEBUGGING CODE
+echo '</pre>';
+
+
+if (isset($_SESSION['customer_id'])) {
+	echo "You are logged in";
+} else {
+	echo "NOT LOGGED IN";
+} */
+?>
 <html>
 <link rel="stylesheet" href="includes/products_display.css" type="text/css" media="screen" />
 <head>
-</head><body><br>
+</head><body>
 
 <?php
 include("includes/head.php"); // inserts header at the top
@@ -28,11 +46,12 @@ if ($category_name == null){
 
 	while($prod_row=mysqli_fetch_array($prod_rows, MYSQLI_ASSOC)){
 		echo "<td class=\"shadow\">
-				<a href=\"#\">
+				<a href=\"http://deepblue.cs.camosun.bc.ca/~ics19901/product_details.php?product_id=".$prod_row['product_id']."\">
 				<img src=\"".$prod_row['product_image']."\"  class=\"img\" />
 				</a>
 				<h4 class=\"text\"><i>".$prod_row['product_name']."</i></h4>
 				<h4 class=\"text\"><i>\$".$prod_row['product_price']."</i></h4>
+				
 		</td>
 	";
 	}
@@ -61,11 +80,12 @@ echo "<br>
 
 while($prod_row=mysqli_fetch_array($prod_rows, MYSQLI_ASSOC)){
 	echo "<td class=\"shadow\">
-			<a href=\"#\">
+			<a href=\"http://deepblue.cs.camosun.bc.ca/~ics19901/product_details.php?product_id=".$prod_row['product_id']."\">
 			<img src=\"{$prod_row['product_image']}\"  class=\"img\" />
 			</a>
 			<h4 class=\"text\"><i>".$prod_row['product_name']."</i></h4>
 			<h4 class=\"text\"><i>\$".$prod_row['product_price']."</i></h4>
+			
 	</td>
 ";
 }

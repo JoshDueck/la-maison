@@ -18,7 +18,7 @@ else {
 <?php
 
 include("includes/head.php");
-
+//include('includes/update products m.html'); 
 include("mysqli_connect.php");
 
 	$q = "select * from PRODUCT;";
