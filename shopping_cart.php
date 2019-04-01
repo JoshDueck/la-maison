@@ -69,9 +69,15 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 	$total=0;
 	
 	$query="select PRODUCT_product_id, CUSTOMER_customer_id, quantity, product_id, product_image, product_name, product_price from CART, PRODUCT where PRODUCT_product_id = product_id and CUSTOMER_customer_id =".$_SESSION['customer_id'].";";
+	
 	$cart_rows = mysqli_query($dbc, $query);
-		// all products
+	
+	
+	
+	// all products
 	echo "<form method=\"POST\" action=\"shopping_cart.php\" enctype=\"multipart/form-data\">";
+	
+	$rownum = 0;
 	
 	while($prod_row=mysqli_fetch_array($cart_rows, MYSQLI_ASSOC)){
 		$prod_name=$prod_row['product_name'];
@@ -84,11 +90,11 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 		echo "<td class=\"image_row\" align='center' style=\"\"><img src=\"".$prod_row['product_image']."\" style=\"width:150px;\"></td>";
 		echo "<td class=\"name_row\" align='center' style=' word-wrap:break-word; word-break: break-all;'>$prod_name</td>";
 		echo "<td align='center'>$".$prod_row['product_price']."</td>";
-		echo "<td align='center'>";
-					//<input type=\"button\" id='decrement_btn' value=\"-\" />
-		echo "<input type=\"number\" id=\"quantity\" name=\"quantity\" value=\"{$prod_row['quantity']}\" />";
-		//<input type=\"button\" id='increment_btn' value=\"+\" />
-		echo "<input type=\"hidden\" id='product_id' name=\"product_id\" value='{$prod_row['product_id']}' />";
+		echo "<td align='center'>
+		<input type=\"button\" class=\"decrement_btn\" id='decrement_btn".$rownum."' value=\"-\" />
+		<input type=\"number\" class=\"quantity\" id=\"quantity".$rownum."\" name=\"quantity\" value=\"{$prod_row['quantity']}\" />
+		<input type=\"button\" class=\"increment_btn\" id='increment_btn".$rownum."' value=\"+\" />
+		<input type=\"hidden\" id='product_id' name=\"product_id\" value='{$prod_row['product_id']}' />";
 		
 			echo "</td>";
 		
@@ -97,6 +103,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 		echo "<td align='center' style='width:100px;'><a href='shopping_cart.php?product_id=".$product_id."&action=remove' style='text-decoration:none;'>Remove</a></td>";
 		echo "<td align='center'>= $subtotal";
 		echo "</tr>";
+		$rownum += 1;
 	}
 	echo "<tr style='color:#ff0000;'>";
 	echo "<td></td>";
@@ -123,7 +130,6 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 ?>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="includes/shopping_cart.js">
-</script>
+<script src="includes/shopping_cart.js"></script>
 </body>
 </html>
