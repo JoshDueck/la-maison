@@ -99,9 +99,9 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 			echo "</td>";
 		
 		
-		
+		echo "<td align='center'>= \$$subtotal";		
 		echo "<td align='center' style='width:100px;'><a href='shopping_cart.php?product_id=".$product_id."&action=remove' style='text-decoration:none;'>Remove</a></td>";
-		echo "<td align='center'>= $subtotal";
+
 		echo "</tr>";
 		$rownum += 1;
 	}
