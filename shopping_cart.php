@@ -27,7 +27,13 @@ if(!(isset($_SESSION['customer_id'])&&$_SESSION['customer_id']!='')){
 	
 // connect to the database
 include("mysqli_connect.php"); // connection name $dbc
-
+	
+	// Getting which product needs to be deleted
+	$prodID = $_GET['product_id'];
+	// Query for deleting product
+	$deleteprod = "DELETE from CART WHERE PRODUCT_product_id='$prodID' and CUSTOMER_customer_id =".$_SESSION['customer_id'].";";
+	// Deleting where product matches the account the user is logged in from
+	$result = mysqli_query($dbc, $deleteprod);
 
 
 /*
@@ -64,7 +70,12 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 	echo "<td align='center'>Price</td>";
 	echo "<td align='center'>Quantity</td>";
 	echo "<td align='center'>Subtotal</td>";
-	echo "<td align='center'></td>";
+	echo "<td align='center'>
+		<form method=\"POST\" action=\"shopping_cart.php\" enctype=\"multipart/form-data\">
+		<input type=\"hidden\" id=\"delete_all\" name=\"delete_all\" value=\"true\">
+	    <button type=\"submit\" name=\"delete\" id=\"delete\">Delete All</button>
+	</td>";
+	
 	echo "</tr>";
 	$total=0;
 	
@@ -100,7 +111,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 		
 		
 		echo "<td align='center'>= \$$subtotal";		
-		echo "<td align='center' style='width:100px;'><a href='shopping_cart.php?product_id=".$product_id."&action=remove' style='text-decoration:none;'>Remove</a></td>";
+		echo "<td align='center' style='width:100px;'><a href='shopping_cart.php?product_id={$prod_row['product_id']}' style='text-decoration:none;'>Remove</a></td>";
 
 		echo "</tr>";
 		$rownum += 1;
