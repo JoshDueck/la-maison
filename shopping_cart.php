@@ -22,11 +22,18 @@ include("includes/head.php");
 // check if user is logged in
 if(!(isset($_SESSION['customer_id'])&&$_SESSION['customer_id']!='')){
 		header("Location:includes/login.php");
-		echo "<h1 >You are not logged in. <a href='login.php'>Login please</a></h1>"; 
+		echo "<h1 align='center'>You are not logged in. <a href='login.php'>Login please</a></h1>"; 
 	}
 	
 // connect to the database
 include("mysqli_connect.php"); // connection name $dbc
+
+	// Getting which product needs to be deleted
+	$prodID = $_GET['product_id'];
+	// Query for deleting product
+	$deleteprod = "DELETE from CART WHERE PRODUCT_product_id='$prodID' and CUSTOMER_customer_id =".$_SESSION['customer_id'].";";
+	// Deleting where product matches the account the user is logged in from
+	$result = mysqli_query($dbc, $deleteprod);
 
 
 
@@ -59,12 +66,17 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 	// table in php
 	echo "<table cellpadding='5' cellspacing='5' style='width:100%;'>";
 	echo "<tr>";
-	echo "<td  class=\"image_row\">Product Image</td>";
-	echo "<td  class=\"name_row\" style='width: 150px; word-break: break-all;'>Product Name</td>";
-	echo "<td>Price</td>";
-	echo "<td>Quantity</td>";
-	echo "<td>Subtotal</td>";
-	echo "<td></td>";
+	echo "<td class=\"image_row\">Product Image</td>";
+	echo "<td class=\"name_row\" style='width: 150px; word-break: break-all;'>Product Name</td>";
+	echo "<td >Price</td>";
+	echo "<td >Quantity</td>";
+	echo "<td >Subtotal</td>";
+	echo "<td >
+		<form method=\"POST\" action=\"shopping_cart.php\" enctype=\"multipart/form-data\">
+		<input type=\"hidden\" id=\"delete_all\" name=\"delete_all\" value=\"true\">
+	    <button type=\"submit\" name=\"delete\" id=\"delete\">Delete All</button>
+	</td>";
+
 	echo "</tr>";
 	$total=0;
 	
@@ -87,10 +99,10 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 		$total += $subtotal;
 		
 		echo "<tr>";
-		echo "<td class=\"image_row\"  style=\"\"><img src=\"".$prod_row['product_image']."\" style=\"width:150px;\"></td>";
-		echo "<td class=\"name_row\"  style=' word-wrap:break-word; word-break: break-all;'>$prod_name</td>";
-		echo "<td id=\"price".$rownum."\">$".$prod_row['product_price']."</td>";
-		echo "<td>
+		echo "<td class=\"image_row\" align='center' style=\"\"><img src=\"".$prod_row['product_image']."\" style=\"width:150px;\"></td>";
+		echo "<td class=\"name_row\" align='center' style=' word-wrap:break-word; word-break: break-all;'>$prod_name</td>";
+		echo "<td align='center'>$".$prod_row['product_price']."</td>";
+		echo "<td align='center'>
 		<input type=\"button\" class=\"decrement_btn\" id='decrement_btn".$rownum."' value=\"-\" />
 		<input type=\"number\" class=\"quantity\" id=\"quantity".$rownum."\" name=\"quantity\" value=\"{$prod_row['quantity']}\" />
 		<input type=\"button\" class=\"increment_btn\" id='increment_btn".$rownum."' value=\"+\" />
@@ -100,7 +112,8 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 		
 		
 		echo "<td class=\"subtotal\" id=\"subtotal".$rownum."\">= \$$subtotal";		
-		echo "<td  style='width:100px;'><a href='shopping_cart.php?product_id=".$product_id."&action=remove' style='text-decoration:none;'>Remove</a></td>";
+		// remove from cart using GET
+		echo "<td style='width:100px;'><a href='shopping_cart.php?product_id={$prod_row['product_id']}' style='text-decoration:none;'>Remove</a></td>";
 
 		echo "</tr>";
 		$rownum += 1;
@@ -110,7 +123,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 	echo "<td></td>";
 	echo "<td></td>";
 	echo "<td></td>";
-	echo "<td>Total</td>";
+	echo "<td align='center'>Total</td>";
 	echo "</tr>";
 	echo "<tr style='color:#000000;'>";
 	echo "<td></td>";
@@ -118,14 +131,14 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 	echo "<td></td>";
 	echo "<td><button type='submit' id=\"save_changes\">Save changes</button></td>";
 			echo "</form>";
-	echo "<td><br /><b>= $total</b></td>";
-	echo "<td><br /><a href='check_out.php'><img src = 'images/checkout.png' width='120px' height='40px'></a></td>";
+	echo "<td align='center'><br /><b>= $total</b></td>";
+	echo "<td align='center'><br /><a href='check_out.php'><img src = 'images/checkout.png' width='120px' height='40px'></a></td>";
 	echo "</tr>";
 	echo "</table>";			
 	
 }else{ // shopping cart is empty
 
-	echo "<font color='#000000'><h1 >Your shopping cart is empty.<br /><br><a href='index.php'><input type='button' class='link1' value='Continue shopping' style='width:150px; height:35px; font-size:15px;'></a></h1></font>";
+	echo "<font color='#000000'><h1 align='center'>Your shopping cart is empty.<br /><br><a href='index.php'><input type='button' class='link1' value='Continue shopping' style='width:150px; height:35px; font-size:15px;'></a></h1></font>";
 }
 ?>
 
