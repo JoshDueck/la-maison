@@ -27,7 +27,13 @@ if(!(isset($_SESSION['customer_id'])&&$_SESSION['customer_id']!='')){
 	
 // connect to the database
 include("mysqli_connect.php"); // connection name $dbc
-
+	
+	// Getting which product needs to be deleted
+	$prodID = $_GET['product_id'];
+	// Query for deleting product
+	$deleteprod = "DELETE from CART WHERE PRODUCT_product_id='$prodID' and CUSTOMER_customer_id =".$_SESSION['customer_id'].";";
+	// Deleting where product matches the account the user is logged in from
+	$result = mysqli_query($dbc, $deleteprod);
 
 
 /*
@@ -59,12 +65,26 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 	// table in php
 	echo "<table cellpadding='5' cellspacing='5' style='width:100%;'>";
 	echo "<tr>";
+<<<<<<< shopping_cart.php
+	echo "<td class=\"image_row\">Product Image</td>";
+	echo "<td class=\"name_row\" style='width: 150px; word-break: break-all;'>Product Name</td>";
+	echo "<td >Price</td>";
+	echo "<td >Quantity</td>";
+	echo "<td >Subtotal</td>";
+	echo "<td >
+		<form method=\"POST\" action=\"shopping_cart.php\" enctype=\"multipart/form-data\">
+		<input type=\"hidden\" id=\"delete_all\" name=\"delete_all\" value=\"true\">
+	    <button type=\"submit\" name=\"delete\" id=\"delete\">Delete All</button>
+	</td>";
+	
+=======
 	echo "<td  class=\"image_row\">Product Image</td>";
 	echo "<td  class=\"name_row\" style='width: 150px; word-break: break-all;'>Product Name</td>";
 	echo "<td>Price</td>";
 	echo "<td>Quantity</td>";
 	echo "<td>Subtotal</td>";
 	echo "<td></td>";
+>>>>>>> shopping_cart.php
 	echo "</tr>";
 	$total=0;
 	
@@ -99,8 +119,13 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 			echo "</td>";
 		
 		
+<<<<<<< shopping_cart.php
+		echo "<td class=\"subtotal\" id=\"subtotal".$rownum."\">= \$$subtotal";		
+		echo "<td style='width:100px;'><a href='shopping_cart.php?product_id={$prod_row['product_id']}' style='text-decoration:none;'>Remove</a></td>";
+=======
 		echo "<td class=\"subtotal\" id=\"subtotal".$rownum."\">= \$$subtotal";		
 		echo "<td  style='width:100px;'><a href='shopping_cart.php?product_id=".$product_id."&action=remove' style='text-decoration:none;'>Remove</a></td>";
+>>>>>>> shopping_cart.php
 
 		echo "</tr>";
 		$rownum += 1;
