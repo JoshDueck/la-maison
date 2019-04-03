@@ -77,6 +77,12 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 	    <button type=\"submit\" name=\"delete\" id=\"delete\">Delete All</button>
 	</td>";
 
+	echo "<td  class=\"image_row\">Product Image</td>";
+	echo "<td  class=\"name_row\" style='width: 150px; word-break: break-all;'>Product Name</td>";
+	echo "<td>Price</td>";
+	echo "<td>Quantity</td>";
+	echo "<td>Subtotal</td>";
+	echo "<td></td>";
 	echo "</tr>";
 	$total=0;
 	
