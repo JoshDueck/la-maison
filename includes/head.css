@@ -60,10 +60,13 @@
 }
 
 .header {
-  overflow: hidden;
-  background-color: #fcf9ed;
-  padding: 10px 10px 0px 10px;
-    border: 1px solid black;
+	overflow: hidden;
+	background-color: #fcf9ed;
+	padding: 10px 10px 0px 10px;
+	border: 1px solid black;
+	-moz-box-sizing: border-box; 
+	-webkit-box-sizing: border-box;     
+	box-sizing: border-box;
 }
 
 .header a {
