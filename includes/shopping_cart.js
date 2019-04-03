@@ -62,7 +62,7 @@ $(document).ready(function(){
 	
 	
 	function $savechangesFade(){
-		$("#save_changes").fadeIn();
+		$("#save_changes_btn").fadeIn();
 	}
 
 	

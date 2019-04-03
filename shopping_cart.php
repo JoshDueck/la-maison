@@ -22,8 +22,9 @@ include("includes/head.php");
 // check if user is logged in
 if(!(isset($_SESSION['customer_id'])&&$_SESSION['customer_id']!='')){
 		header("Location:includes/login.php");
-		echo "<h1 align='center'>You are not logged in. <a href='login.php'>Login please</a></h1>"; 
-	}
+
+		echo "<h1 >You are not logged in. <a href='login.php'>Login please</a></h1>"; 
+}
 	
 // connect to the database
 include("mysqli_connect.php"); // connection name $dbc
@@ -46,23 +47,40 @@ if($delete_all=="true"){
 
 
 
-/*
-// check if quantities were updated
-if (isset($_POST['product_id'])){
-	echo "came from post, update database";
+/***** start of update quantities *****/
+if (isset($_POST["save_changes"])){
 	// create variables
-	$insert = "INSERT INTO CART (CUSTOMER_customer_id, PRODUCT_product_id, quantity) VALUES (".$_SESSION['customer_id'].", $product_id, $quantity) ON DUPLICATE KEY UPDATE quantity= quantity + '$quantity';";
-	
-	if (mysqli_query($dbc, $insert)) { // runs when successfully inserted
-		//  success message
-		echo "<p id=\"success_message\"> You have successfully added $quantity products. <a href='http://deepblue.cs.camosun.bc.ca/~ics19901/shopping_cart.php'>View Shopping cart</a><br/>
-				You now have X products in your shopping cart. Subtotal: XXX</p>";
-	} else { // failed to insert
-		echo "Error: ".mysqli_error($dbc);
+	for ($i=0; $i < 11; $i++){
+		
+		${"quantity".$i} = $_POST["quantity".$i];
+		${"product_id".$i} = $_POST["product_id".$i];
+		
+		// echo "Variables are quantity: ${'quantity'.$i} and product_id: ${'product_id'.$i}"; //debug statement
+		
+		// updates value if the row exists
+		if (${"product_id".$i} > 0){
+				
+			$insert = "UPDATE CART SET quantity=${'quantity'.$i} where CUSTOMER_customer_id=".$_SESSION['customer_id']." and PRODUCT_product_id=${'product_id'.$i};";
+			
+			// echo "The query I'm trying to use is: ".$insert; // debug statement
+			// insert value into database
+			if (mysqli_query($dbc, $insert)) { // runs when successfully inserted
+				//  success message
+				$sucess = true;
+			} else { // failed to insert
+				$sucess = false;
+			}
+		}
 	}
-	// insert value into database
+	// display sucess message
+	if ($sucess == true){
+		echo "<p id=\"success_message\"> You have successfully updated the products.</p>";
+	} else {
+		echo "<p id=\"success_message\"> FAILED TO UPDATE PRODUCTS QUANTITY.<br />";
+		// echo "Error: ".mysqli_error($dbc); // debug statement
+	}
 }
-*/
+/***** end of update quantities *****/
 
 
 
@@ -114,9 +132,9 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 		echo "<td align='center'>$".$prod_row['product_price']."</td>";
 		echo "<td align='center'>
 		<input type=\"button\" class=\"decrement_btn\" id='decrement_btn".$rownum."' value=\"-\" />
-		<input type=\"number\" class=\"quantity\" id=\"quantity".$rownum."\" name=\"quantity\" value=\"{$prod_row['quantity']}\" />
+		<input type=\"number\" class=\"quantity\" id=\"quantity".$rownum."\" name=\"quantity".$rownum."\" value=\"{$prod_row['quantity']}\" />
 		<input type=\"button\" class=\"increment_btn\" id='increment_btn".$rownum."' value=\"+\" />
-		<input type=\"hidden\" id='product_id' name=\"product_id\" value='{$prod_row['product_id']}' />";
+		<input type=\"hidden\" id='product_id".$rownum."' name=\"product_id".$rownum."\" value=\"{$prod_row['product_id']}\" />";
 		
 			echo "</td>";
 
@@ -138,10 +156,13 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 	echo "<td></td>";
 	echo "<td></td>";
 	echo "<td></td>";
-	echo "<td><button type='submit' id=\"save_changes\">Save changes</button></td>";
+	echo "<input type=\"hidden\" id=\"save_changes\" name=\"save_changes\" value=\"true\">";
+	echo "<td><button type='submit' id=\"save_changes_btn\">Save changes</button></td>";
 			echo "</form>";
-	echo "<td align='center'><br /><b>= $total</b></td>";
-	echo "<td align='center'><br /><a href='check_out.php'><img src = 'images/checkout.png' width='120px' height='40px'></a></td>";
+
+	echo "<td><br /><b>= \$$total</b></td>";
+	echo "<td><br /><a href='check_out.php'><img src = 'images/checkout.png' width='120px' height='40px'></a></td>";
+
 	echo "</tr>";
 	echo "</table>";			
 	
