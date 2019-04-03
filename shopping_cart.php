@@ -28,13 +28,6 @@ if(!(isset($_SESSION['customer_id'])&&$_SESSION['customer_id']!='')){
 // connect to the database
 include("mysqli_connect.php"); // connection name $dbc
 
-	// Getting which product needs to be deleted
-	$prodID = $_GET['product_id'];
-	// Query for deleting product
-	$deleteprod = "DELETE from CART WHERE PRODUCT_product_id='$prodID' and CUSTOMER_customer_id =".$_SESSION['customer_id'].";";
-	// Deleting where product matches the account the user is logged in from
-	$result = mysqli_query($dbc, $deleteprod);
-	
 // Getting which product needs to be deleted
 $prodID = $_GET['product_id'];
 // Query for deleting product
@@ -90,7 +83,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 	echo "<td >
 		<form method=\"POST\" action=\"shopping_cart.php\" enctype=\"multipart/form-data\">
 		<input type=\"hidden\" id=\"delete_all\" name=\"delete_all\" value=\"true\">
-	    <button type=\"submit\" name=\"delete\" id=\"delete\">Delete All</button>
+	    <button type=\"submit\" name=\"delete\" id=\"delete\">Remove All</button>
 	</td>";
 
 	echo "<td  class=\"image_row\">Product Image</td>";
