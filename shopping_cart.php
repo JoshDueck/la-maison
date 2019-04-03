@@ -34,6 +34,22 @@ include("mysqli_connect.php"); // connection name $dbc
 	$deleteprod = "DELETE from CART WHERE PRODUCT_product_id='$prodID' and CUSTOMER_customer_id =".$_SESSION['customer_id'].";";
 	// Deleting where product matches the account the user is logged in from
 	$result = mysqli_query($dbc, $deleteprod);
+	
+// Getting which product needs to be deleted
+$prodID = $_GET['product_id'];
+// Query for deleting product
+$deleteprod = "DELETE from CART WHERE PRODUCT_product_id='$prodID' and CUSTOMER_customer_id =".$_SESSION['customer_id'].";";
+// Deleting where product matches the account the user is logged in from
+$result = mysqli_query($dbc, $deleteprod);
+	
+$delete_all = $_POST['delete_all'];
+// If user clicks delete all button
+if($delete_all=="true"){
+	// Query for deleting all products in cart
+	$delete_all = "DELETE from CART WHERE CUSTOMER_customer_id=".$_SESSION['customer_id'].";";
+	// Deleting all items from a the cart of the user that is logged in
+	$result2 = mysqli_query($dbc, $delete_all);
+}
 
 
 
