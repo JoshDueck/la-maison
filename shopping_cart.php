@@ -104,7 +104,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 		<input type=\"hidden\" id=\"delete_all\" name=\"delete_all\" value=\"true\">
 
 	    <button type=\"submit\" name=\"delete\" id=\"delete\">Remove All</button>
-
+		</form>
 	</td>";
 
 	echo "</tr>";
