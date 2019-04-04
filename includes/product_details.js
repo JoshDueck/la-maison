@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 	$("#decrement_btn").on("click", function(){
-		if ($("#quantity").val() > 0){
+		if ($("#quantity").val() > 1){
 			$("#quantity").val(parseInt($("#quantity").val()) - 1);
 		}
 		
