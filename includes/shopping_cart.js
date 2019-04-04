@@ -42,6 +42,7 @@ $(document).ready(function(){
 		$price = $price.substring(1);
 		var $mult = parseFloat($price) * parseInt($($increment_field).val());
 		$subtotal.html("=\$" + $mult.toFixed(2));
+		$updateTotal();
 		$savechangesFade();
 	} // end of increment function
 	
@@ -58,6 +59,7 @@ $(document).ready(function(){
 			$price = $price.substring(1);
 			var $mult = parseFloat($price) * parseInt($($decrement_field).val());
 			$subtotal.html("=\$" + $mult.toFixed(2));
+			$updateTotal();
 			$savechangesFade();
 		}
 	} // end of decrement function
@@ -66,6 +68,21 @@ $(document).ready(function(){
 	function $savechangesFade(){
 		$("#save_changes_btn").fadeIn();
 	}
+
+	function $updateTotal(){
+		var $total = 0;
+		for (let $i=0; $i < 11; $i++){
+			var $subtotal = $("#subtotal".concat($i)).text();
+
+			if ($subtotal.length > 0){
+				$subtotal = $subtotal.substring(2);
+				$subtotal = parseFloat($subtotal);
+				$total += $subtotal;
+			}
+		}
+		$("#total").html("Total: \$" + $total.toFixed(2));
+	}
+
 
 	
 }); // end of ready function

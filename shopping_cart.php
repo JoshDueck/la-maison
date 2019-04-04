@@ -149,7 +149,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 		
 			echo "</td>";
 
-		echo "<td class=\"subtotal\" id=\"subtotal".$rownum."\">= \$$subtotal";		
+		echo "<td class=\"subtotal\" id=\"subtotal".$rownum."\">=\$$subtotal";		
 		// remove from cart using GET
 		echo "<td><a href='shopping_cart.php?product_id={$prod_row['product_id']}' style='text-decoration:none;'>Remove</a></td>";
 
@@ -164,7 +164,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 		
 			<a href='check_out.php'><img src = 'images/checkout.png' width='120px' height='40px'></a>
 			
-			<p>Total: = \$$total</p>
+			<p id='total'>Total: =\$$total</p>
 			
 			<input type=\"hidden\" id=\"save_changes\" name=\"save_changes\" value=\"true\">
 			<button type='submit' id=\"save_changes_btn\">Save changes</button>
