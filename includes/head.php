@@ -30,6 +30,19 @@ session_start();
 <?php
 	if (isset($_SESSION['customer_id'])) { // checking if user is logged in
 ?>
+	<?php
+	// get last timestamp from database
+	
+	include("mysqli_connect.php"); // $dbc connection set
+
+	$lastLogin = "select customer_logintime from CUSTOMER where customer_id = ".$_SESSION['customer_id'].";";
+	if ($result = mysqli_query($dbc, $lastLogin)){
+		$time=mysqli_fetch_array($result, MYSQLI_ASSOC);
+		echo "<h4 id=\"last_login\">Last login: ".$time['customer_logintime']."</h4><br><br>";
+	}else {
+		echo "Error: ".mysqli_error($dbc);
+	}
+	?>
   <input class="header-right" type="button" value="Logout" onclick="window.location.href = 'logout.php'">
 
 <?php
