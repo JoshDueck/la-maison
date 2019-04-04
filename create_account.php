@@ -34,7 +34,7 @@ include('includes/head.php');
       <label for="customer_email"><b>Email:</b></label>
       <input type="text" placeholder="abc@gmail.com" class="search" id="customer_email" name="customer_email" required>
 
-      <label for="password"><b>psw:</b></label>
+      <label for="password"><b>Password:</b></label>
       <input type="password" placeholder="password" class="search" id="password" name="password" required>
 
       <label for="password-repeat"><b>Confirm password:</b></label>
