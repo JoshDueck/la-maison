@@ -46,8 +46,9 @@ include('includes/head.php');
 	<br>
 	<br>
 	<button type="button" class="cancelbtn" id="cancel">Cancel</button> 
-<br>
-<br>
+	<br>
+	<br>
+		<p><input type="checkbox" id="customer_policy" name="customer_policy" value="1" required>To create an account you must agree to the <a href="includes/terms.php">Terms and Conditions</a></p>
 <br>	 
     </div>
   </form>
