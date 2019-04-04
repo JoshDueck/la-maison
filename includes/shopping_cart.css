@@ -84,6 +84,7 @@ font-size:15px;
 	line-height: 25px;
 }
 
+
 th {
 	font-size: 20px;
 	text-align: left;
@@ -92,6 +93,11 @@ th {
 .prod_imgs{
 	height:150px;
 	width:150px;
+}
+.img{
+	height:50px;
+	width:50px;
+
 	position:center;
 }
 
@@ -130,6 +136,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .name_row {
+
 	max-width: 400px;
 	min-width: 200px;
 }
@@ -157,6 +164,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 #floating_total button {
 	margin-top: 25px;
+
 	width: 550px;
 }
 
@@ -164,7 +172,9 @@ input[type=number]::-webkit-outer-spin-button {
 	display: none;
 }
 
+
 #bottom_space{
 	height: 80px;
 	width:100%;
 }
+
