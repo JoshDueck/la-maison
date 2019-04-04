@@ -31,6 +31,7 @@ $(document).ready(function(){
 	
 	
 	function $increment($increment_field){
+		$($increment_field).val(Math.abs($($increment_field).val()));
 		$($increment_field).val(parseInt($($increment_field).val()) + 1);
 		// get the id num of the tag and add it to the tag variable
 		var $sub = $increment_field.substring(9);
@@ -41,10 +42,12 @@ $(document).ready(function(){
 		$price = $price.substring(1);
 		var $mult = parseFloat($price) * parseInt($($increment_field).val());
 		$subtotal.html("=\$" + $mult.toFixed(2));
+		$updateTotal();
 		$savechangesFade();
 	} // end of increment function
 	
 	function $decrement($decrement_field){
+		$($decrement_field).val(Math.abs($($decrement_field).val()));
 		if ($($decrement_field).val() > 1){
 			$($decrement_field).val(parseInt($($decrement_field).val()) - 1);
 			// get the id num of the tag and add it to the tag variable
@@ -56,6 +59,7 @@ $(document).ready(function(){
 			$price = $price.substring(1);
 			var $mult = parseFloat($price) * parseInt($($decrement_field).val());
 			$subtotal.html("=\$" + $mult.toFixed(2));
+			$updateTotal();
 			$savechangesFade();
 		}
 	} // end of decrement function
@@ -64,6 +68,21 @@ $(document).ready(function(){
 	function $savechangesFade(){
 		$("#save_changes_btn").fadeIn();
 	}
+
+	function $updateTotal(){
+		var $total = 0;
+		for (let $i=0; $i < 11; $i++){
+			var $subtotal = $("#subtotal".concat($i)).text();
+
+			if ($subtotal.length > 0){
+				$subtotal = $subtotal.substring(2);
+				$subtotal = parseFloat($subtotal);
+				$total += $subtotal;
+			}
+		}
+		$("#total").html("Total: \$" + $total.toFixed(2));
+	}
+
 
 	
 }); // end of ready function
