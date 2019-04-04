@@ -5,6 +5,22 @@
 <body>
 <?php
 session_start();
+
+//stores last login in database
+if (isset($_SESSION['current_login_time'])){
+	include("mysqli_connect.php"); // $dbc connection set
+
+	$updateTimeStamp = "UPDATE CUSTOMER set customer_logintime='".$_SESSION['current_login_time']."' WHERE customer_id =".$_SESSION['customer_id'].";";
+	if ($result = mysqli_query($dbc, $updateTimeStamp)){
+		echo "login time saved to database";
+	}else {
+	echo "<p>The attempted query is: ".$updateTimeStamp."</p>";
+		echo "Error: ".mysqli_error($dbc);
+		$desc = "desc CUSTOMER";
+		echo "Fields are: ".mysqli_query($dbc, $updateTimeStamp);
+	}
+}
+
 session_destroy();
 
 include("includes/head.php");
