@@ -38,7 +38,7 @@ session_start();
 	$lastLogin = "select customer_logintime from CUSTOMER where customer_id = ".$_SESSION['customer_id'].";";
 	if ($result = mysqli_query($dbc, $lastLogin)){
 		$time=mysqli_fetch_array($result, MYSQLI_ASSOC);
-		echo "Last login: ".$time['customer_logintime'];
+		echo "<h4 id=\"last_login\">Last login: ".$time['customer_logintime']."</h4><br><br>";
 	}else {
 		echo "Error: ".mysqli_error($dbc);
 	}
