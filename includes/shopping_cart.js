@@ -31,6 +31,7 @@ $(document).ready(function(){
 	
 	
 	function $increment($increment_field){
+		$($increment_field).val(Math.abs($($increment_field).val()));
 		$($increment_field).val(parseInt($($increment_field).val()) + 1);
 		// get the id num of the tag and add it to the tag variable
 		var $sub = $increment_field.substring(9);
@@ -45,6 +46,7 @@ $(document).ready(function(){
 	} // end of increment function
 	
 	function $decrement($decrement_field){
+		$($decrement_field).val(Math.abs($($decrement_field).val()));
 		if ($($decrement_field).val() > 1){
 			$($decrement_field).val(parseInt($($decrement_field).val()) - 1);
 			// get the id num of the tag and add it to the tag variable

@@ -58,25 +58,34 @@ if (isset($_POST["save_changes"])){
 		// echo "Variables are quantity: ${'quantity'.$i} and product_id: ${'product_id'.$i}"; //debug statement
 		
 		// updates value if the row exists
-		if (${"product_id".$i} > 0){
+
+		if (isset($_POST["quantity".$i])){
+			if (${"quantity".$i} != 0){
 				
-			$insert = "UPDATE CART SET quantity=${'quantity'.$i} where CUSTOMER_customer_id=".$_SESSION['customer_id']." and PRODUCT_product_id=${'product_id'.$i};";
+				$insert = "UPDATE CART SET quantity=".abs(${'quantity'.$i})." where CUSTOMER_customer_id=".$_SESSION['customer_id']." and PRODUCT_product_id=${'product_id'.$i};";
 			
-			// echo "The query I'm trying to use is: ".$insert; // debug statement
-			// insert value into database
-			if (mysqli_query($dbc, $insert)) { // runs when successfully inserted
-				//  success message
-				$sucess = true;
-			} else { // failed to insert
+				// echo "The query I'm trying to use is: ".$insert; // debug statement
+				// insert value into database
+				if (mysqli_query($dbc, $insert)) { // runs when successfully inserted
+					//  success message
+					$sucess = true;
+				} else { // failed to insert
+					$sucess = false;
+					break;
+				}
+			} else{
+				echo "<p id=\"failure_message\">Failed to set quantity to zero. If you wish to remove a product, click on the remove button.<br />";
 				$sucess = false;
+				break;
 			}
 		}
+		
 	}
 	// display sucess message
 	if ($sucess == true){
 		echo "<p id=\"success_message\"> You have successfully updated the products.</p>";
 	} else {
-		echo "<p id=\"success_message\"> FAILED TO UPDATE PRODUCTS QUANTITY.<br />";
+		echo "<p id=\"failure_message\"> FAILED TO UPDATE PRODUCTS QUANTITY.<br />";
 		// echo "Error: ".mysqli_error($dbc); // debug statement
 	}
 }
@@ -131,7 +140,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 		echo "<tr>";
 		echo "<td class=\"image_row\"><a href=\"product_details.php?product_id={$prod_row['product_id']}\"><img class=\"prod_imgs\" src=\"".$prod_row['product_image']."\"></a></td>";
 		echo "<td class=\"name_row\">$prod_name</td>";
-		echo "<td>$".$prod_row['product_price']."</td>";
+		echo "<td id='price".$rownum."'>$".$prod_row['product_price']."</td>";
 		echo "<td>
 		<input type=\"button\" class=\"decrement_btn\" id='decrement_btn".$rownum."' value=\"-\" />
 		<input type=\"number\" class=\"quantity\" id=\"quantity".$rownum."\" name=\"quantity".$rownum."\" value=\"{$prod_row['quantity']}\" />
