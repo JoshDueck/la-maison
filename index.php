@@ -1,5 +1,6 @@
 <html>
 <link rel="stylesheet" href="includes/products_display.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="includes/index.css" type="text/css" media="screen" />
 <head>
 </head><body><br>
 
@@ -22,6 +23,7 @@ if($create_account=="true"){ // user came from create_account page
 		$customer_email = $_POST['customer_email'];
 		$password = $_POST['password'];
 		$password_repeat = $_POST['password_repeat'];
+		$customer_policy = $_POST['customer_policy'];
 		
 	//checking email
 		include('mysqli_connect.php');
@@ -43,8 +45,8 @@ if($create_account=="true"){ // user came from create_account page
 		if($row == 0) {
 			echo "Email is valid, ready to isnert";
 			$query = "insert into CUSTOMER (account_type, customer_fname, customer_lname, customer_country, 
-			customer_province, customer_city, customer_address, customer_postal, customer_email, customer_password) 
-			values ('user', '$firstname', '$lastname', '$country', '$province', '$city', '$address', '$postal', '$customer_email', md5('$password'))";
+			customer_province, customer_city, customer_address, customer_postal, customer_email, customer_password, customer_policy) 
+			values ('user', '$firstname', '$lastname', '$country', '$province', '$city', '$address', '$postal', '$customer_email', md5('$password'), $customer_policy)";
 			if (mysqli_query($dbc, $query)){
 				echo "inserted successfully";
 			}else{
@@ -95,6 +97,7 @@ if($create_account=="true"){ // user came from create_account page
 			$_SESSION['customer_city']=$prod_row['customer_city'];
 			$_SESSION['customer_address']=$prod_row['customer_address'];
 			$_SESSION['customer_postal']=$prod_row['customer_postal'];
+			$_SESSION['customer_policy']=$customer_policy;
 				
 			
 			echo "You have logged in successfully";
@@ -120,6 +123,17 @@ if($create_account=="true"){ // user came from create_account page
 		include("mysqli_connect.php"); // $dbc connection set
 		$username = $_SESSION['customer_email']; // Change to get first and last name from database
 		echo "Hello, ".$_SESSION['customer_fname']."! Welcome to La Maison.";
+		
+		if ($_POST['accept'] == true) {
+			echo "hello test to see if customer policy is being changed";
+			// Query for updating terms and conditions
+			$acceptedterms = "UPDATE CUSTOMER set customer_policy=true WHERE customer_id =".$_SESSION['customer_id'].";";
+			// Updating that the user has accepted terms and conditions
+			$result = mysqli_query($dbc, $acceptedterms);
+		}
+		else {
+			echo "Error: ".mysqli_error($dbc);
+		}
 	}
 	else {
 		if (isset($_POST['customer_email'])) {
@@ -143,6 +157,35 @@ if($create_account=="true"){ // user came from create_account page
 				$_SESSION['customer_city']=$prod_row['customer_city'];
 				$_SESSION['customer_address']=$prod_row['customer_address'];
 				$_SESSION['customer_postal']=$prod_row['customer_postal'];
+				$_SESSION['customer_policy']=$prod_row['customer_policy'];
+				
+				if ($_SESSION['customer_policy'] == 0) { // checking if they've accepted terms and conditions
+				?>
+				<!-- The Modal -->
+				<div id="myModal" class="modal">
+
+				  <!-- Modal content -->
+				  <div class="modal-content">
+					<span class="close" action="login.php">&times;</span>
+					
+					<p>
+					
+					<?php include('includes/terms.php'); ?>
+					
+					<form method="POST" action="index.php" enctype="multipart/form-data">
+					<button type="submit" name="accept" id="accept" value="true">I accept</button></form>
+					
+					<form method="POST" action="login.php" enctype="multipart/form-data">
+					<button type="submit" name="decline" id="decline">I do not accept</button></form>
+					
+					<br><br><br><br><br><br>
+					</p>
+				  </div>
+
+				</div>
+				<?php
+				} // closing bracket for checking if they've accepted terms and conditions
+
 				
 				/*
 				echo "You have logged in successfully";
@@ -160,6 +203,41 @@ if($create_account=="true"){ // user came from create_account page
 		}
 	}
 }
+
+
+/*if ($_SESSION['customer_policy'] == 0) { // checking if they've accepted terms and conditions --------------------------------------
+?>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p><?php include('includes/terms.php'); 
+	echo "<form method=\"POST\" action=\"index.php\" enctype=\"multipart/form-data\">
+	<input type=\"hidden\" id=\"accept\" name=\"accept\" value=\"true\">
+	<button type=\"submit\" name=\"accept\" id=\"accept\">I accept</button></form>"; // Accept button
+	
+	echo "<form method=\"POST\" action=\"index.php\" enctype=\"multipart/form-data\">
+	<input type=\"hidden\" id=\"decline\" name=\"decline\" value=\"true\">
+	<button type=\"submit\" name=\"decline\" id=\"decline\">I do not accept</button></form>"; // Decline button
+	
+	?></p>
+  </div>
+
+</div>
+<?php
+} // closing bracket for checking if they've accepted terms and conditions
+
+
+if ($_POST['accept']) {
+	// Query for updating terms and conditions
+	$acceptedterms = "UPDATE CUSTOMER set customer_policy=true WHERE CUSTOMER_customer_id =".$_SESSION['customer_id'].";";
+	// Updating that the user has accepted terms and conditions
+	$result = mysqli_query($dbc, $acceptedterms);
+}
+*/																								//----------------------------------------
+
 
 include("includes/head.php"); // inserts header at the top
 
@@ -209,5 +287,7 @@ if ($category_name == null){
 
 include("footer.html");
 ?>
+
+<script src="includes/index.js"></script>
 </body>
 </html>
