@@ -6,5 +6,5 @@
 		data-description="Access for a year"
 		data-amount="5000"
 		data-locale="auto"></script>
-	<input type="hidden" name="totalamt" value="1256">
+	<input type="hidden" name="totalamt" value="<?php echo "145.36" ?>">
 </form>

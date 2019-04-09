@@ -1,31 +1,44 @@
 <?php
 session_start();
-include('includes/header.html');
-require_once('./config.php');
-if (isset($_SESSION['username'])) {
-	$token  = $_POST['stripeToken'];
-	$email  = $_POST['stripeEmail'];
 
+include('includes/head.php');
+if (isset($_SESSION['customer_id'])) {
+/*
+					echo '<pre>';
+					var_dump($_SESSION);
+					echo '</pre>';
+
+					echo '<pre>';
+					var_dump($_POST);
+					echo '</pre>';
+*/
+	
+	require_once('./config.php');
+	$token  = $_POST['stripeToken'];
 	$totalamt = $_POST['totalamt'];
 
 	echo "Total amt: $totalamt";
 	$customer = \Stripe\Customer::create(array(
-	  'email' => $email,
-	  'source'  => $token
+		'email' => $email,
+		'source'  => $token
 	));
 
-	$charge = \Stripe\Charge::create(array(
-	  'customer' => $customer->id,
-	  'amount'   => $totalamt,
-	  'currency' => 'cad'
-	));
-
+	
+	$totalamt *= 100;
+	
+  $charge = \Stripe\Charge::create(array(
+      'customer' => $customer->id,
+      'amount'   => $totalamt,
+      'currency' => 'cad'
+  ));
+  
 	$amount = number_format(($totalamt / 100), 2);
-	echo '<h3>Successfully charged $'.$amount.' </h3>Thank you for shopping at Tuk Tuk Heaven';
+	echo '<h3>Successfully charged $'.$amount.' </h3>Thank you for shopping at La Maison';
 	// query to delete the cart:
 	  
 	  
 	// inserting data to the order_history
+	include("mysqli_connect.php"); // connection name $dbc
 	$query1 = "insert into ORDER_HISTORY (CUSTOMER_customer_id, order_date, order_time) values (".$_SESSION['customer_id'].", curdate(), curtime());";
 		
 	$data_rows = mysqli_query($dbc, $query1);
@@ -48,11 +61,14 @@ if (isset($_SESSION['username'])) {
 	
 		$data_rows = mysqli_query($dbc, $query2);
 		
-		if (!mysqli_query($dbc, $query2)) {
+		if (!$data_rows) {
 			echo "Error: ".mysqli_error($dbc);
-		} 
-		
+		}
 	}
+} else{
+	echo "
+	<h3>You have to be logged in to access this page.</h3>
+	";
 }
   include ('includes/footer.html');
 ?>

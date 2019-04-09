@@ -11,7 +11,7 @@
 session_start();
 /*
 					echo '<pre>';
-					var_dump($_SESSION);
+					var_dump($_POST);
 					echo '</pre>';
 */
 include("includes/head.php");
@@ -48,47 +48,52 @@ if($delete_all=="true"){
 
 
 /***** start of update quantities *****/
-if (isset($_POST["save_changes"])){
-	// create variables
-	for ($i=0; $i < 11; $i++){
-		
-		${"quantity".$i} = $_POST["quantity".$i];
-		${"product_id".$i} = $_POST["product_id".$i];
-		
-		// echo "Variables are quantity: ${'quantity'.$i} and product_id: ${'product_id'.$i}"; //debug statement
-		
-		// updates value if the row exists
 
-		if (isset($_POST["quantity".$i])){
-			if (${"quantity".$i} != 0){
-				
-				$insert = "UPDATE CART SET quantity=".abs(${'quantity'.$i})." where CUSTOMER_customer_id=".$_SESSION['customer_id']." and PRODUCT_product_id=${'product_id'.$i};";
+if (isset($_POST["changes_made"])){ // they clicked +/- buttons
+	// write the query to get all the products from the cart
+
+	include("mysqli_connect.php"); // connection name $dbc
+	$query="select CUSTOMER_customer_id, quantity, product_id, product_price from CART, PRODUCT where PRODUCT_product_id = product_id and CUSTOMER_customer_id =".$_SESSION['customer_id'].";";
+	$cart_rows = mysqli_query($dbc, $query);
+		
+	while($prod_row=mysqli_fetch_array($cart_rows, MYSQLI_ASSOC)){ // loop to find the product that was changed
+		//echo "Variables are quantity: ${'quantity'.$i} and product_id: ${'product_id'.$i}"; //debug statement
+		
+		if (isset($_POST["quantity{$prod_row['product_id']}"])){ // the quantity is the one we need to change
+			$quantity = abs($_POST["quantity{$prod_row['product_id']}"]);
+		
+			if(isset($_POST["decrement_btn{$prod_row['product_id']}"])){
+				$quantity--; 
+			} else{
+				$quantity++;
+			}
 			
+			$insert = "UPDATE CART SET quantity=".$quantity." where CUSTOMER_customer_id=".$_SESSION['customer_id']." and PRODUCT_product_id=".$_POST["product_id{$prod_row['product_id']}"].";";
+				
 				// echo "The query I'm trying to use is: ".$insert; // debug statement
 				// insert value into database
+
 				if (mysqli_query($dbc, $insert)) { // runs when successfully inserted
 					//  success message
-					$sucess = true;
+					$success = true;
 				} else { // failed to insert
-					$sucess = false;
+					$success = false;
 					break;
 				}
-			} else{
-				echo "<p id=\"failure_message\">Failed to set quantity to zero. If you wish to remove a product, click on the remove button.<br />";
-				$sucess = false;
-				break;
-			}
 		}
-		
+
 	}
-	// display sucess message
-	if ($sucess == true){
+	
+	// display success message
+	if ($success == true){
 		echo "<p id=\"success_message\"> You have successfully updated the products.</p>";
 	} else {
 		echo "<p id=\"failure_message\"> FAILED TO UPDATE PRODUCTS QUANTITY.<br />";
 		// echo "Error: ".mysqli_error($dbc); // debug statement
 	}
+
 }
+
 /***** end of update quantities *****/
 
 
@@ -126,9 +131,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 	
 	
 	// all products
-	echo "<form method=\"POST\" action=\"shopping_cart.php\" enctype=\"multipart/form-data\">";
 	
-	$rownum = 0;
 	
 	while($prod_row=mysqli_fetch_array($cart_rows, MYSQLI_ASSOC)){
 		$prod_name=$prod_row['product_name'];
@@ -140,21 +143,36 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 		echo "<tr>";
 		echo "<td class=\"image_row\"><a href=\"product_details.php?product_id={$prod_row['product_id']}\"><img class=\"prod_imgs\" src=\"".$prod_row['product_image']."\"></a></td>";
 		echo "<td class=\"name_row\">$prod_name</td>";
-		echo "<td id='price".$rownum."'>$".$prod_row['product_price']."</td>";
-		echo "<td>
-		<input type=\"button\" class=\"decrement_btn\" id='decrement_btn".$rownum."' value=\"-\" />
-		<input type=\"number\" class=\"quantity\" id=\"quantity".$rownum."\" name=\"quantity".$rownum."\" value=\"{$prod_row['quantity']}\" />
-		<input type=\"button\" class=\"increment_btn\" id='increment_btn".$rownum."' value=\"+\" />
-		<input type=\"hidden\" id='product_id".$rownum."' name=\"product_id".$rownum."\" value=\"{$prod_row['product_id']}\" />";
+		echo "<td id='price{$prod_row['product_id']}'>$".$prod_row['product_price']."</td>";
+		echo "<td>";
+		// start of update quantities form
+		echo "<form method=\"POST\" action=\"shopping_cart.php\" enctype=\"multipart/form-data\">
 		
+		<button type=\"submit\" class=\"decrement_btn\" id='decrement_btn{$prod_row['product_id']}' name='decrement_btn{$prod_row['product_id']}' value=\"-\" />-</button>
+		<input type=\"hidden\" id='product_id{$prod_row['product_id']}' name=\"product_id{$prod_row['product_id']}\" value=\"{$prod_row['product_id']}\" />
+		<input type=\"hidden\" class=\"quantity\" id=\"quantity{$prod_row['product_id']}\" name=\"quantity{$prod_row['product_id']}\" value=\"{$prod_row['quantity']}\" />
+		<input type=\"hidden\" id='changes_made' name=\"changes_made\" value=\"true\" />";
+		echo "</form>";
+		
+		echo "<span id=\"quantity{$prod_row['product_id']}\">{$prod_row['quantity']}</span>";
+		// start of update quantities form
+		
+		echo "<form method=\"POST\" action=\"shopping_cart.php\" enctype=\"multipart/form-data\">
+		<button type=\"submit\" class=\"increment_btn\" id='increment_btn{$prod_row['product_id']}' name='increment_btn{$prod_row['product_id']}' value=\"+\">+</button>
+		<input type=\"hidden\" id='changes_made' name=\"changes_made\" value=\"true\" />
+		<input type=\"hidden\" class=\"quantity\" id=\"quantity{$prod_row['product_id']}\" name=\"quantity{$prod_row['product_id']}\" value=\"{$prod_row['quantity']}\" />
+		<input type=\"hidden\" id='product_id{$prod_row['product_id']}' name=\"product_id{$prod_row['product_id']}\" value=\"{$prod_row['product_id']}\" />";
+		
+		echo "</form>"; // end of update quantities form
 			echo "</td>";
 
-		echo "<td class=\"subtotal\" id=\"subtotal".$rownum."\">=\$$subtotal";		
+		echo "<td class=\"subtotal\" id=\"subtotal{$prod_row['product_id']}\">=\$$subtotal";		
 		// remove from cart using GET
 		echo "<td><a href='shopping_cart.php?product_id={$prod_row['product_id']}' style='text-decoration:none;'>Remove</a></td>";
 
 		echo "</tr>";
-		$rownum += 1;
+	
+		
 	}
 	echo "</table>";
 	
@@ -162,13 +180,33 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 	// start of floating_total div
 	echo "<div id='floating_total'>
 		
-			<a href='check_out.php'><img src = 'images/checkout.png' width='120px' height='40px'></a>
-			
 			<p id='total'>Total: =\$$total</p>
 			
-			<input type=\"hidden\" id=\"save_changes\" name=\"save_changes\" value=\"true\">
-			<button type='submit' id=\"save_changes_btn\">Save changes</button>
-			</form>
+			
+		";
+		
+		$stripeamount = $total*100;
+
+		?>
+		
+		<?php require_once('./config.php'); ?>
+
+		<form action="charge.php" method="post">
+			<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+				data-key="<?php echo $stripe['publishable_key']; ?>"
+				data-description="Access for a year"
+				data-amount="<?php echo "$stripeamount" ?>"
+				data-locale="auto"></script>
+			<input type="hidden" name="totalamt" value="<?php echo "$total" ?>">
+			<input type="hidden" name="totalamt" value="<?php echo "$total" ?>">
+			<input type="hidden" name="totalamt" value="<?php echo "$total" ?>">
+			<input type="hidden" name="totalamt" value="<?php echo "$total" ?>">
+			<input type="hidden" name="totalamt" value="<?php echo "$total" ?>">
+		</form>
+		
+		
+		<?php
+		echo "
 			
 	</div>
 	"; // end of floating_total div
