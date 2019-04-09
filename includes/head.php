@@ -55,7 +55,7 @@ session_start();
   
   
   <input class="header-right" type="button" value="Cart" onclick="window.location.href = 'shopping_cart.php'">
-  <input class="header-right" type="button" value="Order History">
+  <input class="header-right" type="button" value="Order History" onclick="window.location.href = 'order_history.php'">
 <?php
 }  // closing check to see if account is logged in
 else { // execute if user is not logged into an account
