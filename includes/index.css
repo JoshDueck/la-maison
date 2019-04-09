@@ -44,7 +44,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 }
 
  .scrollBox {
-   height: 650px;
+   height: 80%;
    width: 100%;
    border: 1px solid #ccc;
    overflow: auto;
