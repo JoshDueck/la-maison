@@ -1,6 +1,6 @@
 <?php
   session_start();
-  include('includes/header.html');
+  include('includes/head.php');
   require_once('./config.php');
 
   $token  = $_POST['stripeToken'];
@@ -13,6 +13,8 @@
       'email' => $email,
       'source'  => $token
   ));
+
+	$totalamt *= 100;
 
   $charge = \Stripe\Charge::create(array(
       'customer' => $customer->id,

@@ -126,7 +126,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 	
 	
 	// all products
-	echo "<form method=\"POST\" action=\"shopping_cart.php\" enctype=\"multipart/form-data\">";
+	
 	
 	$rownum = 0;
 	
@@ -136,15 +136,15 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 		$prod_image=$prod_row['product_image'];
 		$subtotal=$prod_row['quantity']*$prod_row['product_price'];
 		$total += $subtotal;
-		
+		echo "<form method=\"POST\" action=\"shopping_cart.php\" enctype=\"multipart/form-data\">"; // start of update quantities form
 		echo "<tr>";
 		echo "<td class=\"image_row\"><a href=\"product_details.php?product_id={$prod_row['product_id']}\"><img class=\"prod_imgs\" src=\"".$prod_row['product_image']."\"></a></td>";
 		echo "<td class=\"name_row\">$prod_name</td>";
 		echo "<td id='price".$rownum."'>$".$prod_row['product_price']."</td>";
 		echo "<td>
-		<input type=\"button\" class=\"decrement_btn\" id='decrement_btn".$rownum."' value=\"-\" />
+		<button type=\"submit\" class=\"decrement_btn\" id='decrement_btn".$rownum."' name='decrement_btn".$rownum."' value=\"-\" />
 		<input type=\"number\" class=\"quantity\" id=\"quantity".$rownum."\" name=\"quantity".$rownum."\" value=\"{$prod_row['quantity']}\" />
-		<input type=\"button\" class=\"increment_btn\" id='increment_btn".$rownum."' value=\"+\" />
+		<input type=\"button\" class=\"increment_btn\" id='increment_btn".$rownum."' name='increment_btn".$rownum."' value=\"+\" />
 		<input type=\"hidden\" id='product_id".$rownum."' name=\"product_id".$rownum."\" value=\"{$prod_row['product_id']}\" />";
 		
 			echo "</td>";
@@ -155,6 +155,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 
 		echo "</tr>";
 		$rownum += 1;
+		echo "</form>"; // end of update quantities form
 	}
 	echo "</table>";
 	
@@ -162,13 +163,33 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 	// start of floating_total div
 	echo "<div id='floating_total'>
 		
-			<a href='check_out.php'><img src = 'images/checkout.png' width='120px' height='40px'></a>
-			
 			<p id='total'>Total: =\$$total</p>
 			
-			<input type=\"hidden\" id=\"save_changes\" name=\"save_changes\" value=\"true\">
-			<button type='submit' id=\"save_changes_btn\">Save changes</button>
-			</form>
+			
+		";
+		
+		$stripeamount = $total*100;
+
+		?>
+		
+		<?php require_once('./config.php'); ?>
+
+		<form action="charge.php" method="post">
+			<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+				data-key="<?php echo $stripe['publishable_key']; ?>"
+				data-description="Access for a year"
+				data-amount="<?php echo "$stripeamount" ?>"
+				data-locale="auto"></script>
+			<input type="hidden" name="totalamt" value="<?php echo "$total" ?>">
+			<input type="hidden" name="totalamt" value="<?php echo "$total" ?>">
+			<input type="hidden" name="totalamt" value="<?php echo "$total" ?>">
+			<input type="hidden" name="totalamt" value="<?php echo "$total" ?>">
+			<input type="hidden" name="totalamt" value="<?php echo "$total" ?>">
+		</form>
+		
+		
+		<?php
+		echo "
 			
 	</div>
 	"; // end of floating_total div
