@@ -43,7 +43,7 @@ session_start();
 		echo "Error: ".mysqli_error($dbc);
 	}
 	?>
-  <input class="header-right" type="button" value="Logout" onclick="window.location.href = 'logout.php'">
+  <input id="logout" class="header-right" type="button" value="Logout" onclick="window.location.href = 'logout.php'">
 
 <?php
 		if ($account_type == 'admin') { // checking if user account is of type admin
@@ -55,12 +55,12 @@ session_start();
   
   
   <input class="header-right" type="button" value="Cart" onclick="window.location.href = 'shopping_cart.php'">
-  <input class="header-right" type="button" value="Order History">
+  <input class="header-right" type="button" value="Order History" onclick="window.location.href = 'order_history.php'">
 <?php
 }  // closing check to see if account is logged in
 else { // execute if user is not logged into an account
 ?>
-  <input class="header-right" type="button" value="Login" onclick="window.location.href = 'login.php'">
+  <input id="login" class="header-right" type="button" value="Login" onclick="window.location.href = 'login.php'">
   <input class="header-right" type="button" value="Sign Up" onclick="window.location.href = 'create_account.php'">
 <?php
 } // end of else statement
