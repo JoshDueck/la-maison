@@ -1,0 +1,28 @@
+b{
+	padding-right:300px;
+}
+
+#order_id{
+	padding-left:400px;
+}
+
+#product_image{
+	padding-left:700px;
+}
+
+.product_name{
+	max-width:50px;
+}
+
+.img{
+	height:150px;
+	width:150px;
+}
+
+p{
+	border: 1px solid black;
+}
+
+.order_container{
+	display:none;
+}
