@@ -3,7 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="includes/order.css">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="includes/order.js"></script>
 </head>
 <body>
 
@@ -47,7 +48,7 @@ if(isset($_SESSION['customer_id']) && ($history_rows > 0)) {
 	
 	while($history_rows=mysqli_fetch_array($order_rows, MYSQLI_ASSOC)) {
 		
-		$preTotal = "<p><button onclick=\"myFunction()\" class=\"swap\"><i class=\"fa fa-angle-double-right\"></i></button><b class=\"order_number\"> # ".$history_rows['order_number']."</b><b class=\"total_price\">$"; // html content before the total
+		$preTotal = "<p><button id=\"toggle_{$history_rows['order_number']}\" class=\"swap\"><i class=\"fa fa-angle-double-right\"></i></button><b class=\"order_number\"> # ".$history_rows['order_number']."</b><b class=\"total_price\">$"; // html content before the total
 		
 		$total = 0;
 
@@ -62,7 +63,7 @@ if(isset($_SESSION['customer_id']) && ($history_rows > 0)) {
 		while($products_rows=mysqli_fetch_array($prod_rows, MYSQLI_ASSOC)) {
 			$prodDisplay .= "
 			<br>
-			<div class=\"order_details\">
+			<div class=\"order_details".$products_rows['product_id']."\">
 				<b class=\"product_image\">
 					<a href=\"product_details.php?product_id=".$products_rows['product_id']."\"><img src=\"".$products_rows['product_image']."\"  class=\"img\"/>
 					</a>
@@ -83,9 +84,22 @@ if(isset($_SESSION['customer_id']) && ($history_rows > 0)) {
 		echo "".$preTotal;
 		echo "".$actTotal;
 		echo "".$postTotal;
+		echo "<div class=\"order_container\" id=\"order_container_{$history_rows['order_number']}\">";
 		echo "".$prodDisplay;
+		echo "</div>";
+		echo "
+		<script>
+			$(\"#toggle_{$history_rows['order_number']}\").click(function(){
+				if ($(\"#order_container_{$history_rows['order_number']}\").is(\":visible\")){ // content currently displayed
+					$(\"#order_container_{$history_rows['order_number']}\").slideUp();
+				} else{ // content currently hidden
+					$(\"#order_container_{$history_rows['order_number']}\").slideDown();
+				}
+			});
+			
+		</script>
 		
-	
+		";
 	} // close outter while loop
 }else{ // order history is empty
 	
@@ -102,7 +116,6 @@ if(isset($_SESSION['customer_id']) && ($history_rows > 0)) {
 <?php
 include("includes/footer.html");
 ?>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="includes/order.js"></script>
+	
 </body>
 </html>
