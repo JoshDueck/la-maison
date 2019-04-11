@@ -1,0 +1,44 @@
+b{
+	padding-right:300px;
+}
+.fa-caret-down:before {
+	content:none;
+}
+
+
+#order_id{
+	padding-left:400px;
+}
+
+#product_image{
+	padding-left:700px;
+}
+
+.product_name{
+
+	padding-right:60px;
+	/*padding:0px 0px 0px 0px;*/
+}
+b.product_name{
+max-width: 100px;	
+}
+.img{
+	height:150px;
+	width:150px;
+}
+
+.border{
+	border: 1px solid black;
+}
+
+.order_container{
+	display:none;
+}
+.purchase_price{
+padding-left:70px;
+padding-right:70px;
+}
+.quantity{
+padding-left:70px;
+padding-right:70px;
+}
