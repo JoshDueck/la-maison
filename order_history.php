@@ -48,7 +48,7 @@ if(isset($_SESSION['customer_id']) && ($history_rows > 0)) {
 	
 	while($history_rows=mysqli_fetch_array($order_rows, MYSQLI_ASSOC)) {
 		
-		$preTotal = "<p><button id=\"toggle_{$history_rows['order_number']}\" class=\"swap\"><i class=\"fa fa-angle-double-right\"></i></button><b class=\"order_number\"> # ".$history_rows['order_number']."</b><b class=\"total_price\">$"; // html content before the total
+		$preTotal = "<p class=\"border\"><button id=\"toggle_{$history_rows['order_number']}\" class=\"swap\"><i class=\"fa fa-angle-double-right\"></i></button><b class=\"order_number\"> # ".$history_rows['order_number']."</b><b class=\"total_price\">$"; // html content before the total
 		
 		$total = 0;
 
