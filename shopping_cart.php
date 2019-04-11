@@ -143,7 +143,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 		echo "<tr>";
 		echo "<td class=\"image_row\"><a href=\"product_details.php?product_id={$prod_row['product_id']}\"><img class=\"prod_imgs\" src=\"".$prod_row['product_image']."\"></a></td>";
 		echo "<td class=\"name_row\">$prod_name</td>";
-		echo "<td id='price{$prod_row['product_id']}'>$".$prod_row['product_price']."</td>";
+		echo "<td id='price{$prod_row['product_id']}'>$ ".$prod_row['product_price']."</td>";
 		echo "<td>";
 		// start of update quantities form
 		echo "<form method=\"POST\" action=\"shopping_cart.php\" enctype=\"multipart/form-data\">
@@ -166,7 +166,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 		echo "</form>"; // end of update quantities form
 			echo "</td>";
 
-		echo "<td class=\"subtotal\" id=\"subtotal{$prod_row['product_id']}\">=\$$subtotal";		
+		echo "<td class=\"subtotal\" id=\"subtotal{$prod_row['product_id']}\"> \$ $subtotal";		
 		// remove from cart using GET
 		echo "<td><a href='shopping_cart.php?product_id={$prod_row['product_id']}' style='text-decoration:none;'>Remove</a></td>";
 
@@ -180,7 +180,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 	// start of floating_total div
 	echo "<div id='floating_total'>
 		
-			<p id='total'>Total: =\$$total</p>
+			<p id='total'>Total: \$ $total</p>
 			
 			
 		";

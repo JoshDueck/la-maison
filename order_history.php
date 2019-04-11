@@ -44,7 +44,7 @@ if(isset($_SESSION['customer_id']) && ($history_rows > 0)) {
 
 	echo "<h3><u>Your Orders</u></h3>";
 	
-	
+	echo '<script type="text/javascript"></script>'; 
 	while($history_rows=mysqli_fetch_array($order_rows, MYSQLI_ASSOC)) {
 		
 		$preTotal = "<p><button onclick=\"myFunction()\" class=\"swap\"><i class=\"fa fa-angle-double-right\"></i></button><b class=\"order_number\"> # ".$history_rows['order_number']."</b><b class=\"total_price\">$"; // html content before the total
@@ -102,7 +102,7 @@ if(isset($_SESSION['customer_id']) && ($history_rows > 0)) {
 <?php
 include("includes/footer.html");
 ?>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
 	<script src="includes/order.js"></script>
 </body>
 </html>
