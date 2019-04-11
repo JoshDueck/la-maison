@@ -184,7 +184,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 	// start of floating_total div
 	echo "<div id='floating_total'>
 		
-			<p id='total'Subtotal: \$$total <br/>
+			<p id='total'>Subtotal: \$$total <br/>
 						Tax (12%) <br/>
 						Total: \$$taxed_total
 			</p>
