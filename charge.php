@@ -67,7 +67,7 @@ if (isset($_SESSION['customer_id'])) {
 	}
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		// QUERY FOR ORDER_ID AND TIME OF PURCHASE
-		$orderquery = "SELECT order_number, order_date, order_time FROM ORDER_HISTORY WHERE CUSTOMER_customer_id = ".$_SESSION['customer_id'].";";
+		$orderquery = "SELECT order_number, order_date, order_time FROM ORDER_HISTORY WHERE order_number = $last_id and CUSTOMER_customer_id = ".$_SESSION['customer_id'].";";
 
 		$row = mysqli_query($dbc, $orderquery);
 		$order_number = $last_id;
@@ -86,13 +86,29 @@ if (isset($_SESSION['customer_id'])) {
 
 		$newreceipt = fopen($file, "w") or die("Unable to open file.");
 		
-		$ordernum = "ORDER NUMBER: $order_number\n";
+		//
+		echo "<table id=\"order_table\" border='1'>
+			<tr id='titles'>
+			<td id='name'>Name</td>
+			<td id='price'>Price</td>
+			<td id='quantity'>Quantity</td>
+			<td id='total'>Total</td>
+			</tr>";
+
+
+
+
+		echo "<br>";
+		$ordernum = "Order number: #$order_number\n";
 		fwrite($newreceipt, $ordernum);
+		echo " $ordernum";
+		echo "<br>";
 		
 		$day_ordered = $order_row['order_date'];
 		$time_ordered = $order_row['order_time'];
 		$orderdate = "Purchased on: $day_ordered at $time_ordered\n";
 		fwrite($newreceipt, $orderdate);
+		echo "$orderdate";
 		
 		$ordered_byfname = $_SESSION['customer_fname'];
 		$ordered_bylname = $_SESSION['customer_lname'];
@@ -100,27 +116,97 @@ if (isset($_SESSION['customer_id'])) {
 		fwrite($newreceipt, $ordername);
 		
 		$total = 0;
+		echo "<h3>PRODUCTS</h3>";
 		while ($prod_row=mysqli_fetch_array($row2, MYSQLI_ASSOC)) {
 			$prod_name = $prod_row['product_name'];
 			$prod_quantity = $prod_row['quantity'];
 			$prod_price = $prod_row['product_price'] * $prod_quantity;
-			$orderproducts = "PRODUCT: $prod_name     AMOUNT PURCHASED: $prod_quantity for $$prod_price\n";
+			$prod_price_per = $prod_row['product_price'];
+			$orderproducts = "Product: $prod_name \nAmount purchased: $prod_quantity for $$prod_price\n\n";
 			fwrite($newreceipt, $orderproducts);
+			echo "<tr>
+			<td id='productname'>$prod_name</td>
+			<td id='productprice'>$$prod_price_per</td>
+			<td id='productquantity'>$prod_quantity</td>
+			<td id='producttotal'>$$prod_price</td>
+			</tr>";
 			$total = $total+$prod_price;
 		} 
-		$total_price = "TOTAL PRICE: $total\n";
-		fwrite($newreceipt, $total_price);
+		$subtotal = $total;
+		echo "<tr>
+		<td colspan=\"3\">Subtotal</td>
+		<td>$$subtotal</td>
+		</tr>";
+		
+		$subtotal_str = "Subtotal: $$subtotal \n";
+		fwrite($newreceipt, $subtotal_str);
+		
+		$tax_percent = 0.12;
+		$tax = $total * $tax_percent;
+		$tax = number_format($tax, 2);
+		echo "<tr>
+			<td colspan=\"3\">Tax</td>
+			<td>$$tax</td>
+			</tr>";
+			
+		$tax_str = "Taxed amount: $$tax \n";
+		fwrite($newreceipt, $tax_str);
+		
+		$total_price = $total+$tax;
+		$total_price_str = "Total cost: $$total_price \n";
+		fwrite($newreceipt, $total_price_str);
+		
+		echo "<tr>
+		<td colspan=\"3\">Total</td>
+		<td>$$total_price</td>
+		</tr>
+		</table>";
 		
 		$country = $_SESSION['customer_country'];
 		$province = $_SESSION['customer_province'];
 		$city = $_SESSION['customer_city'];
 		$address = $_SESSION['customer_address'];
 		$postal = $_SESSION['customer_postal'];
-		$orderaddress = "Order sent to: $address \n$city, $province, $country \n$postal";
+		$orderaddress = "\nOrder sent to: $address \n$city, $province, $country \n$postal";
 		fwrite($newreceipt, $orderaddress);
+		
+		echo "<br>";
+		echo "Order sent to: $address";
+		echo "<br>";
+		echo "$city, $province, $country";
+		echo "<br>";
+		echo "$postal";
 			
 		fclose($newreceipt);
 		
+		/*
+		$total2 = 0;
+		echo "<br>";
+		echo "$ordernum";
+		echo "<br>";
+		echo "$orderdate";
+		echo "<br>";
+		echo "$ordername";
+		echo "<br>";
+		while ($prod_row=mysqli_fetch_array($row2, MYSQLI_ASSOC)) {
+			$prod_name = $prod_row['product_name'];
+			$prod_quantity = $prod_row['quantity'];
+			$prod_price = $prod_row['product_price'] * $prod_quantity;
+			echo "PRODUCT: $prod_name";
+			echo "<br>";
+			echo "AMOUNT PURCHASED: $prod_quantity for $$prod_price";
+			echo "<br>";
+			echo "<br>";
+			$total2 = $total2+$prod_price;
+		}
+		echo "TOTAL AMOUNT: $total2 <br> hello";
+		echo "<br>";
+		echo "$address";
+		echo "<br>";
+		echo "$city, $province, $country";
+		echo "<br>";
+		echo "$postal";
+		*/
 		// Deleting cart from database
 		$delete_all = "DELETE from CART WHERE CUSTOMER_customer_id=".$_SESSION['customer_id'].";";
 		mysqli_query($dbc, $delete_all);
