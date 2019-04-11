@@ -11,7 +11,7 @@
 $create_account = $_POST['create_account'];
 
 if($create_account=="true"){ // user came from create_account page
-	echo "Coming from create account";
+	/* echo "Coming from create account"; */
 	// get all the post variables
 		$firstname = $_POST['firstname'];
 		$lastname = $_POST['lastname'];
@@ -43,12 +43,12 @@ if($create_account=="true"){ // user came from create_account page
 		
 		// insert them into the database
 		if($row == 0) {
-			echo "Email is valid, ready to isnert";
+			/* echo "Email is valid, ready to insert"; */
 			$query = "insert into CUSTOMER (account_type, customer_fname, customer_lname, customer_country, 
 			customer_province, customer_city, customer_address, customer_postal, customer_email, customer_password, customer_policy) 
 			values ('user', '$firstname', '$lastname', '$country', '$province', '$city', '$address', '$postal', '$customer_email', md5('$password'), $customer_policy)";
 			if (mysqli_query($dbc, $query)){
-				echo "inserted successfully";
+			/*	echo "inserted successfully"; */
 			}else{
 				echo "Error: ".mysqli_error($dbc);
 			}
@@ -65,7 +65,7 @@ if($create_account=="true"){ // user came from create_account page
 		
 		$row2 = mysqli_fetch_array($query2, MYSQLI_NUM);
 		
-		echo "$row2[0], $customer_email";
+		/* echo "$row2[0], $customer_email"; */
 		
 		
 		
@@ -101,7 +101,7 @@ if($create_account=="true"){ // user came from create_account page
 			$_SESSION['current_login_time']=date('M d, y G:i');
 				
 			
-			echo "You have logged in successfully";
+		/*	echo "You have logged in successfully"; */
 				
 		} else { // Not a match!
 			echo  "<h4>Invalid login credentials. Please <a href='login.php'>TRY AGAIN</a></h4>";
@@ -189,18 +189,18 @@ if($create_account=="true"){ // user came from create_account page
 
 				
 				
-				echo "You have logged in successfully";
-				echo "The session id is...: ".session_id();
+				/* echo "You have logged in successfully";
+				echo "The session id is...: ".session_id(); 
 					echo '<pre>';
 					var_dump($_SESSION);
-					echo '</pre>';
+					echo '</pre>'; */
 			} else { // Not a match!
 				echo  "<h4>Invalid login credentials. Please <a href='login.php'>TRY AGAIN</a></h4>";
 			}
 			
 		}
 		else{
-			echo "Not logged in";
+			/* echo "Not logged in"; */
 		}
 	}
 }
