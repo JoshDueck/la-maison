@@ -12,7 +12,7 @@ if (isset($_SESSION['current_login_time'])){
 
 	$updateTimeStamp = "UPDATE CUSTOMER set customer_logintime='".$_SESSION['current_login_time']."' WHERE customer_id =".$_SESSION['customer_id'].";";
 	if ($result = mysqli_query($dbc, $updateTimeStamp)){
-		echo "login time saved to database";
+		/* echo "login time saved to database"; */
 	}else {
 	echo "<p>The attempted query is: ".$updateTimeStamp."</p>";
 		echo "Error: ".mysqli_error($dbc);
@@ -41,8 +41,8 @@ session_destroy();
 
 include("includes/head.php");
  echo "<br>";
-echo "You have successfully logged out";
-echo  "<h4>To log back in: <a href='login.php'>Click Here</a></h4>";
+echo "<h1 align = 'center'>You have successfully logged out</h1><br>";
+echo  "<h2 align = 'center'>To log back in: <a href='login.php'>Click Here</a></h2>";
 if ($disabled){
 	echo "<p>Your account has been successfully disabled. If you wish to enable it, accept the terms and conditions after logging in</p>";
 } else{

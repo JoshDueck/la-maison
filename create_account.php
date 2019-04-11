@@ -4,41 +4,41 @@
 <?php 
 include('includes/head.php');
 ?>
-  <form class="modal-content" action="index.php" method="POST">
+  <form class="modal-content" action="index.php" method="POST" onSubmit="return formValidation()">
 
 	<div class="container">
       <h1>Create Account</h1>
      
       <hr>
 	  <label for="firstname"><b>First Name:</b></label>
-      <input type="text" placeholder="Charles" class="search" id="firstname" name="firstname" required>
+      <input type="text" placeholder="Charles" class="search" id="firstname" name="firstname">
 	  
 	  <label for="lastname"><b>Last Name:</b></label>
-      <input type="text" placeholder="Smith" class="search" name="lastname" required>
+      <input type="text" placeholder="Smith" class="search" name="lastname">
 	  
 	  <label for="streer"><b>Street Address:</b></label>
-      <input type="text" placeholder="78 Lampton Street" class="search" name="address" required>
+      <input type="text" placeholder="78 Lampton Street" class="search" name="address">
 	  
 	  <label for="city"><b>City:</b></label>
-      <input type="text" placeholder="Victoria" class="search" name="city" required>
+      <input type="text" placeholder="Victoria" class="search" name="city">
 	  
 	   <label for="province"><b>Province:</b></label>
-      <input type="text" placeholder="BC" class="search" name="province" required>
+      <input type="text" placeholder="BC" class="search" name="province">
 	  
 	   <label for="country"><b>Country:</b></label>
-      <input type="text" placeholder="Canada"  class="search"name="country" required>
+      <input type="text" placeholder="Canada"  class="search"name="country">
 	  
 	   <label for="postal"><b>Postal Code:</b></label>
-      <input type="text" placeholder="V9K1L3" class="search" id="postal" name="postal" required>
+      <input type="text" placeholder="V9K1L3" class="search" id="postal" name="postal">
 	  
       <label for="customer_email"><b>Email:</b></label>
-      <input type="text" placeholder="abc@gmail.com" class="search" id="customer_email" name="customer_email" required>
+      <input type="text" placeholder="abc@gmail.com" class="search" id="customer_email" name="customer_email">
 
       <label for="password"><b>Password:</b></label>
-      <input type="password" placeholder="password" class="search" id="password" name="password" required>
+      <input type="password" placeholder="password" class="search" id="password" name="password">
 
       <label for="password-repeat"><b>Confirm password:</b></label>
-      <input type="password" placeholder="Re-type password" class="search" id="password_repeat" name="password_repeat" required>
+      <input type="password" placeholder="Re-type password" class="search" id="password_repeat" name="password_repeat">
       <br>
 	  <br><input type="hidden" id="create_account" name="create_account" value="true">
 	      <button type="submit" class= "btn" name="submit" id="submit"> Create Account </button>
