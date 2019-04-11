@@ -145,6 +145,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 		echo "<td class=\"name_row\">$prod_name</td>";
 		echo "<td id='price{$prod_row['product_id']}'>$".$prod_row['product_price']."</td>";
 		echo "<td>";
+	
 		// start of update quantities form
 		echo "<form method=\"POST\" action=\"shopping_cart.php\" enctype=\"multipart/form-data\">
 		
@@ -154,7 +155,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 		<input type=\"hidden\" id='changes_made' name=\"changes_made\" value=\"true\" />";
 		echo "</form>";
 		
-		echo "<span id=\"quantity{$prod_row['product_id']}\">{$prod_row['quantity']}</span>";
+		echo "<span class='quantity' id=\"quantity{$prod_row['product_id']}\">{$prod_row['quantity']}</span>";
 		// start of update quantities form
 		
 		echo "<form method=\"POST\" action=\"shopping_cart.php\" enctype=\"multipart/form-data\">
@@ -164,6 +165,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 		<input type=\"hidden\" id='product_id{$prod_row['product_id']}' name=\"product_id{$prod_row['product_id']}\" value=\"{$prod_row['product_id']}\" />";
 		
 		echo "</form>"; // end of update quantities form
+	
 			echo "</td>";
 
 		echo "<td class=\"subtotal\" id=\"subtotal{$prod_row['product_id']}\">=\$$subtotal";		
