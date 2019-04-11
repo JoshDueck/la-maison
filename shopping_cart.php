@@ -167,7 +167,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 		echo "</form>"; // end of update quantities form
 	
 			echo "</td>";
-
+		
 		echo "<td class=\"subtotal\" id=\"subtotal{$prod_row['product_id']}\">=\$$subtotal";		
 		// remove from cart using GET
 		echo "<td><a href='shopping_cart.php?product_id={$prod_row['product_id']}' style='text-decoration:none;'>Remove</a></td>";
@@ -178,16 +178,21 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 	}
 	echo "</table>";
 	
-	
+	$tax_percent = 0.12;
+	$taxed_total = $total * (1+ $tax_percent);
+	$taxed_total = number_format($taxed_total, 2);
 	// start of floating_total div
 	echo "<div id='floating_total'>
 		
-			<p id='total'>Total: =\$$total</p>
+			<p id='total'>Subtotal: \$$total <br/>
+						Tax (12%) <br/>
+						Total: \$$taxed_total
+			</p>
 			
 			
 		";
 		
-		$stripeamount = $total*100;
+		$stripeamount = $taxed_total*100;
 
 		?>
 		
@@ -199,11 +204,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 				data-description="Access for a year"
 				data-amount="<?php echo "$stripeamount" ?>"
 				data-locale="auto"></script>
-			<input type="hidden" name="totalamt" value="<?php echo "$total" ?>">
-			<input type="hidden" name="totalamt" value="<?php echo "$total" ?>">
-			<input type="hidden" name="totalamt" value="<?php echo "$total" ?>">
-			<input type="hidden" name="totalamt" value="<?php echo "$total" ?>">
-			<input type="hidden" name="totalamt" value="<?php echo "$total" ?>">
+			<input type="hidden" name="totalamt" value="<?php echo "$taxed_total" ?>">
 		</form>
 		
 		
