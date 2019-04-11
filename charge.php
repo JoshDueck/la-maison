@@ -1,3 +1,7 @@
+<html>
+<head>
+<link rel="stylesheet" href="includes/receipt.css" type="text/css" media="screen" />
+</head>
 <?php
 session_start();
 
@@ -218,3 +222,4 @@ if (isset($_SESSION['customer_id'])) {
 }
   include ('includes/footer.html');
 ?>
+</html>
