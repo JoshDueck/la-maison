@@ -123,18 +123,14 @@ if($create_account=="true"){ // user came from create_account page
 	if (isset($_SESSION['customer_email'])) {
 		include("mysqli_connect.php"); // $dbc connection set
 		$username = $_SESSION['customer_email']; // Change to get first and last name from database
-		echo "Hello, ".$_SESSION['customer_fname']."! Welcome to La Maison.";
 		
 		if ($_POST['accept'] == true) {
-			echo "hello test to see if customer policy is being changed";
 			// Query for updating terms and conditions
 			$acceptedterms = "UPDATE CUSTOMER set customer_policy=true WHERE customer_id =".$_SESSION['customer_id'].";";
 			// Updating that the user has accepted terms and conditions
 			$result = mysqli_query($dbc, $acceptedterms);
 		}
-		else {
-			echo "Error: ".mysqli_error($dbc);
-		}
+		
 	}
 	else {
 		if (isset($_POST['customer_email'])) {
@@ -171,19 +167,22 @@ if($create_account=="true"){ // user came from create_account page
 					<span class="close" action="login.php">&times;</span>
 					
 					<p>
-					
-					<?php include('includes/terms.php'); ?>
-					
-					<form method="POST" action="index.php" enctype="multipart/form-data">
-					<button type="submit" name="accept" id="accept" value="true">I accept</button></form>
-					
-					<form method="POST" action="login.php" enctype="multipart/form-data">
-					<button type="submit" name="decline" id="decline">I do not accept</button></form>
-					
-					<br><br><br><br><br><br>
+					<div class="scrollBox">
+					<p>
+					<?php include('includes/terms.html'); ?>
 					</p>
-				  </div>
+					</div>
+						<br>
+						
+						<form method="POST" action="login.php" class="formbutton" enctype="multipart/form-data">
+						<button type="submit" name="decline" id="decline">I do not accept</button></form>
+						
+						<form method="POST" action="index.php" class="formbutton" enctype="multipart/form-data">
+						<button type="submit" name="accept" id="accept" value="true">I accept</button></form>
 
+					</p>
+					<br><br>
+				  </div>
 				</div>
 				<?php
 				} // closing bracket for checking if they've accepted terms and conditions
@@ -287,7 +286,7 @@ if ($category_name == null){
 
 
 
-include("footer.html");
+include("includes/footer.html");
 ?>
 
 <script src="includes/index.js"></script>
