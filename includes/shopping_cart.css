@@ -172,6 +172,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 #floating_total p {
 	margin-top: 30px;
+	margin-right: 20px;
 }
 
 #floating_total button {
