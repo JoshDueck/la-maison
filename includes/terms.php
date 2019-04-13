@@ -11,9 +11,6 @@ echo "<H1>Terms and Conditions</H1>
 <h1>Thanks for visiting La Maison Website</h1>
 <br>
 
-<h1>Terms of Use</h1>
-<br>
-
 <h2>Agreement with our Terms and Conditions</h2>
 
 <p>By using the site, you agree to accept the terms and conditions of this agreement(\"terms and conditions\"), so please be sure to read them carefully. If you do not agree with our terms and conditions, please do not use our site. We reserve the right, at our discretion, to change, modify, add or remove portions of theses terms and conditions at any time. Unless the law requires otherwise, your continued use of our site following the posting of changes to these terms will mean that you accept those changes.</p>
@@ -25,7 +22,7 @@ echo "<H1>Terms and Conditions</H1>
 
 <h1>Privacy Policy</h1>
 
-<p>At La Maison, we are committed to protecting the privacy of our customers and therefore do not sell or rent our customers' Personal Information to any third party. For the purpose of this Privacy Policy. We do not share your Personal Information with any third parties for their direct marketing purposes without first providing you with the opportunity to opt-in or opt-out of such sharing. You may request information about how we manage your Personal Information consistent with this Privacy Policy by contacting us at <a href = \"mailto:lamaison.homeinterior@gmail.com\"> La Maison</a>.</p>
+<p>At La Maison, we are committed to protecting the privacy of our customers and therefore do not sell or rent our customers' Personal Information to any third party. For the purpose of this Privacy Policy. We do not share your Personal Information with any third parties for their direct marketing purposes without first providing you with the opportunity to opt-in or opt-out of such sharing. You may request information about how we manage your Personal Information consistent with this Privacy Policy by contacting us at <b><a href = \"mailto:lamaison.homeinterior@gmail.com\"> La Maison</a></b>.</p>
 <br>
 <br>
 <h2>What personal data we collect and process</h2>
@@ -58,17 +55,13 @@ echo "<H1>Terms and Conditions</H1>
 <p> We collect Personal Information for the purposes of fulfilling orders processing returns and exchanges and providing you with the services you have chosen, providing you with information we believe may be of interest including mailing order information. We do not sell Personal Information and we do not disclose Personal Information to any other party, except as set forth in this Privacy Policy or as required by applicable law or regulatory requirements. Unless otherwise provided in this Privacy Policy, any non-Personal Information you transmit to the site or we collect from the site will be treated as non-confidential and non-proprietary and you agree that we may use any such non-Personal Information in any manner, for any purpose, without credit or compensation to you.</p>
 
 <br>
-<br>
-<br>
-
-<form method=\"POST\" action=\"../logout.php\" class=\"formbutton\" enctype=\"multipart/form-data\">
-<button type=\"submit\" name=\"declined_terms\" id=\"declined_terms\">I do not accept this terms and conditions</button></form>
-
-<br>
-<br>
 
 <h2 id='warning'>WARNING: If you click this button, your account will be deactivated</h2>
 
+<br>
+
+<form method=\"POST\" action=\"../logout.php\" class=\"formbutton\" enctype=\"multipart/form-data\">
+<p id=\"disagree\"><button type=\"submit\" name=\"declined_terms\" id=\"declined_terms\">I do not accept this terms and conditions</button></p></form>
 "
 
 
