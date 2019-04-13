@@ -104,7 +104,11 @@ if($create_account=="true"){ // user came from create_account page
 		/*	echo "You have logged in successfully"; */
 				
 		} else { // Not a match!
-			echo  "<h4>Invalid login credentials. Please <a href='login.php'>TRY AGAIN</a></h4>";
+			echo '<script language="javascript">';
+			echo 'alert("Your email/password is incorret")';
+			echo 'window.location.replace("login.php")';
+			echo '</script>';
+			/*echo "<h4>Invalid login credentials. Please <a href='login.php'>TRY AGAIN</a></h4>"; */
 			//echo $_POST['customer_email'];
 		}
 		
@@ -195,7 +199,11 @@ if($create_account=="true"){ // user came from create_account page
 					var_dump($_SESSION);
 					echo '</pre>'; */
 			} else { // Not a match!
-				echo  "<h4>Invalid login credentials. Please <a href='login.php'>TRY AGAIN</a></h4>";
+				echo '<script language="javascript">';
+				echo 'alert("Your email/password is incorret");';
+				echo 'window.location.replace("login.php")';
+				echo '</script>';
+				/*echo  "<h4>Invalid login credentials. Please <a href='login.php'>TRY AGAIN</a></h4>";*/
 			}
 			
 		}
