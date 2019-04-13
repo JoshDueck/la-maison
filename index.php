@@ -98,7 +98,7 @@ if($create_account=="true"){ // user came from create_account page
 			$_SESSION['customer_address']=$prod_row['customer_address'];
 			$_SESSION['customer_postal']=$prod_row['customer_postal'];
 			$_SESSION['customer_policy']=$customer_policy;
-			$_SESSION['current_login_time']=date('M d, y G:i');
+			/* $_SESSION['current_login_time']=date('M d, y G:i'); */
 				
 			
 		/*	echo "You have logged in successfully"; */
@@ -155,7 +155,7 @@ if($create_account=="true"){ // user came from create_account page
 				$_SESSION['customer_address']=$prod_row['customer_address'];
 				$_SESSION['customer_postal']=$prod_row['customer_postal'];
 				$_SESSION['customer_policy']=$prod_row['customer_policy'];
-				$_SESSION['current_login_time']=date('Y/m/d G:i');
+				/* $_SESSION['current_login_time']=date('Y/m/d G:i'); */
 				
 				if ($_SESSION['customer_policy'] == 0) { // checking if they've accepted terms and conditions
 				?>
