@@ -93,6 +93,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			echo "Email is already in use";
 		}
 }
+mysqli_close($dbc);
+
 include('includes/footer.html');
 
 ?>

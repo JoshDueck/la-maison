@@ -42,6 +42,7 @@ session_start();
 	}else {
 		echo "Error: ".mysqli_error($dbc);
 	}
+	mysqli_close($dbc);
 	?>
   <input id="logout" class="header-right" type="button" value="Logout" onclick="window.location.href = 'logout.php'">
 
@@ -104,7 +105,7 @@ while($cat_row=mysqli_fetch_array($cat_rows, MYSQLI_ASSOC)){
 echo "</div>"; // end of navbar div
 
 
-
+mysqli_close($dbc);
 ?>
 <br>
 <br>

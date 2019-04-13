@@ -125,6 +125,7 @@ $result = mysqli_query($dbc, $query);
 			";
 		
 	}
+mysqli_close($dbc);
 ?>
 	
 </article>

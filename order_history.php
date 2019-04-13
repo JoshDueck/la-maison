@@ -106,6 +106,7 @@ if(isset($_SESSION['customer_id']) && ($history_rows > 0)) {
 	echo "<h1 align='center'>You have no orders<br><br><a href='index.php'><input type='button' class='link1' value='Continue shopping'></a></h1>";
 }
 
+mysqli_close($dbc);
 ?>
 
 

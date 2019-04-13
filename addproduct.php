@@ -181,7 +181,7 @@ if (isset($_SESSION['username'])) {                             LOGIN SESSION
 	echo  "<h4>You are not logged in. Please <a href='log in.html'>LOG IN</a></h4>";
 } // END IF for outside IF
 */
-
+mysqli_close($dbc);
 
 ?>
 
