@@ -93,6 +93,8 @@ echo "</tr>
 	</table>
 	<br>
 	<br>";
+	
+include("includes/footer.html");
 
 ?>
 
