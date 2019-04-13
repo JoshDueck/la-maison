@@ -7,10 +7,10 @@
 session_start();
 
 //stores last login in database
-if (isset($_SESSION['current_login_time'])){
+/* if (isset($_SESSION['current_login_time'])){ */
 	include("mysqli_connect.php"); // $dbc connection set
 
-	$updateTimeStamp = "UPDATE CUSTOMER set customer_logintime='".$_SESSION['current_login_time']."' WHERE customer_id =".$_SESSION['customer_id'].";";
+	$updateTimeStamp = "UPDATE CUSTOMER set customer_logintime =current_timestamp() WHERE customer_id =".$_SESSION['customer_id'].";";
 	if ($result = mysqli_query($dbc, $updateTimeStamp)){
 		/* echo "login time saved to database"; */
 	}else {
@@ -21,7 +21,7 @@ if (isset($_SESSION['current_login_time'])){
 	}
 
 	mysqli_close($dbc);
-}
+/* } */
 
 
 if (isset($_POST['declined_terms'])){
