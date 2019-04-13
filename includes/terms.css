@@ -1,4 +1,16 @@
 #warning{
 	color:red;
 	background-color:white;
+	text-align: center;
+}
+
+#declined_terms {
+	width: 20%;
+	height: 4%;
+	font-size: 18px;
+	text-align: center;
+}
+
+#disagree {
+	text-align: center;
 }
