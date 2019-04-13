@@ -279,6 +279,8 @@ if ($category_name == null){
 		</table>
 		<br>
 		<br>";
+
+	mysqli_close($dbc);
 }
 
 /***** end of displaying all products *****/

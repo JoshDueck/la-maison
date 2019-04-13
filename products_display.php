@@ -94,6 +94,8 @@ echo "</tr>
 	<br>
 	<br>";
 	
+mysqli_close($dbc);
+	
 include("includes/footer.html");
 
 ?>

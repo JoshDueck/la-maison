@@ -19,6 +19,8 @@ if (isset($_SESSION['current_login_time'])){
 		$desc = "desc CUSTOMER";
 		echo "Fields are: ".mysqli_query($dbc, $updateTimeStamp);
 	}
+
+	mysqli_close($dbc);
 }
 
 
@@ -33,6 +35,8 @@ if (isset($_POST['declined_terms'])){
 		echo "Error: ".mysqli_error($dbc);
 		$disabled = true;
 	}
+
+	mysqli_close($dbc);
 }
 
 

@@ -219,6 +219,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 	echo "<h1 align='center'>Your shopping cart is empty.<br><br><a href='index.php'><input type='button' class='link1' value='Continue shopping'></a></h1>";
 }
 
+mysqli_close($dbc);
 
 include("includes/footer.html");
 

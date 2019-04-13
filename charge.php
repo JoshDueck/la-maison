@@ -220,6 +220,7 @@ if (isset($_SESSION['customer_id'])) {
 	<h3>You have to be logged in to access this page.</h3>
 	";
 }
+	mysqli_close($dbc);
   include ('includes/footer.html');
 ?>
 </html>
