@@ -2,11 +2,17 @@
 function formValidation() {
 	
 	var $firstname = $("#firstname").val();
+	var $firstnameRe = /[a-zA-Z]$/;
 	var $lastname = $("#lastname").val();
+	var $lastnameRe= /[a-zA-Z]$/;
 	var $address = $("#address").val();
+	var $addressRe = /[a-zA-Z0-9]$/;
 	var $city = $("#city").val();
+	var $cityRe = /[a-zA-Z]$/;
 	var $province = $("#province").val();
+	var $provinceRe = /[a-zA-Z]$/;
 	var $country = $("#country").val();
+	var $countryRe = /[a-zA-Z]$/;
 	var $postal = $("#postal").val();
 	var $postalRe = /^[a-zA-Z][0-9][a-zA-Z][\s]?[0-9][a-zA-Z][0-9]$/;
 	var $email = $("#customer_email").val();
@@ -15,7 +21,7 @@ function formValidation() {
 	var $password_repeat = $("#password_repeat").val();
 	
 		/* first name */
-	if ($firstname == "" || $firstname == null) {
+	if ($firstnameRe.test($firstname) == false) {
 
 		alert ("Error: Provide your first name in valid format");
 		$("#firstname").focus();
@@ -23,7 +29,7 @@ function formValidation() {
 	}
 		
 		/* last name */
-	if ($lastname = "") {
+	if ($lastnameRe.test($lastname) == false) {
 
 		alert ("Error: Provide your last name in valid format");
 		$("#lastname").focus();
@@ -31,7 +37,7 @@ function formValidation() {
 	}
 		
 		/* address */
-	if ($address = "") {
+	if ($addressRe.test($address) == false) {
 
 		alert ("Error: Provide your address in valid format");
 		$("#address").focus();
@@ -39,21 +45,21 @@ function formValidation() {
 	}
 
 		/* city */
-	if ($city = "") {
+	if ($cityRe.test($city) == false) {
 
 		alert ("Error: Provide your city in valid format");
 		$("#city").focus();
 		return false;
 	}
 		/* province */
-	if ($province = "") {
+	if ($provinceRe.test($province) == false) {
 
 		alert ("Error: Provide your province in valid format");
 		$("#province").focus();
 		return false;
 	}
 		/* country */
-	if ($country = "") {
+	if ($countryRe.test($country) == false) {
 
 		alert ("Error: Provide your country in valid format");
 		$("#country").focus();

@@ -19,11 +19,11 @@ include("includes/head.php");
   <br>
 	
     <label for="email"><b>Email:</b></label>
-    <input type="text" placeholder="Enter Email" id="email" name="customer_email" required>
+    <input type="text" placeholder="Enter Email" id="email" name="customer_email">
 	<br>
 	<br>
     <label for="password"><b>Password:</b></label>
-    <input type="password" placeholder="Enter Password" id="password" name="password" required>
+    <input type="password" placeholder="Enter Password" id="password" name="password">
      <br>  
 	 <br>
     <button type="submit">Log In</button>

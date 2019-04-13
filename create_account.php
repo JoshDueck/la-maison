@@ -14,19 +14,19 @@ include('includes/head.php');
       <input type="text" placeholder="Charles" class="search" id="firstname" name="firstname">
 	  
 	  <label for="lastname"><b>Last Name:</b></label>
-      <input type="text" placeholder="Smith" class="search" name="lastname">
+      <input type="text" placeholder="Smith" class="search" id="lastname" name="lastname">
 	  
-	  <label for="streer"><b>Street Address:</b></label>
-      <input type="text" placeholder="78 Lampton Street" class="search" name="address">
+	  <label for="address"><b>Street Address:</b></label>
+      <input type="text" placeholder="78 Lampton Street" class="search" id="address" name="address">
 	  
 	  <label for="city"><b>City:</b></label>
-      <input type="text" placeholder="Victoria" class="search" name="city">
+      <input type="text" placeholder="Victoria" class="search" id="city" name="city">
 	  
 	   <label for="province"><b>Province:</b></label>
-      <input type="text" placeholder="BC" class="search" name="province">
+      <input type="text" placeholder="BC" class="search" id="province" name="province">
 	  
 	   <label for="country"><b>Country:</b></label>
-      <input type="text" placeholder="Canada"  class="search"name="country">
+      <input type="text" placeholder="Canada"  class="search" id="country" name="country">
 	  
 	   <label for="postal"><b>Postal Code:</b></label>
       <input type="text" placeholder="V9K1L3" class="search" id="postal" name="postal">
