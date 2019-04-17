@@ -76,6 +76,33 @@ if (isset($_SESSION['customer_id'])) {
 		// QUERY FOR ORDER_ID AND TIME OF PURCHASE
 		$orderquery = "SELECT order_number, order_date, order_time FROM ORDER_HISTORY WHERE order_number = $last_id and CUSTOMER_customer_id = ".$_SESSION['customer_id'].";";
 
+
+		$row = mysqli_query($dbc, $orderquery);
+		$order_number = $last_id;
+		$order_row=mysqli_fetch_array($row, MYSQLI_ASSOC);
+		// QUERY FOR PRODUCTS THAT WERE PURCHASED
+		$customer_id = $_SESSION['customer_id'];
+		
+		$prodquery = "SELECT product_name, product_price, quantity from ORDER_PRODUCT o, PRODUCT p, ORDER_HISTORY h 
+					WHERE h.order_number=o.ORDER_HISTORY_order_number and p.product_id = o.PRODUCT_product_id
+					and h.CUSTOMER_customer_id = $customer_id and h.order_number = $order_number;";
+		$row2 = mysqli_query($dbc, $prodquery);
+		
+		$receipt = "$order_number".$_SESSION['customer_fname'].$_SESSION['customer_lname'];
+		// Identify the file to use:
+		$file = "/home/student/ics19901/receipts/$receipt.txt";
+
+		$newreceipt = fopen($file, "w") or die("Unable to open file.");
+		
+		//
+		echo "<table id=\"order_table\" border='1'>
+			<tr id='titles'>
+			<td id='name'><b>Name</b></td>
+			<td id='price'><b>Price</b></td>
+			<td id='quantity'><b>Quantity</b></td>
+			<td id='total'><b>Total</b></td>
+			</tr>";
+
 		$row = mysqli_query($dbc, $orderquery);
 		$order_number = $last_id;
 		$order_row=mysqli_fetch_array($row, MYSQLI_ASSOC);
@@ -105,18 +132,27 @@ if (isset($_SESSION['customer_id'])) {
 
 
 
+
 		echo "<br>";
 		$ordernum = "Order number: #$order_number\n";
 		fwrite($newreceipt, $ordernum);
 		echo " $ordernum";
 		echo "<br>";
+
+		echo "<br>";
+
 		
 		$day_ordered = $order_row['order_date'];
 		$time_ordered = $order_row['order_time'];
 		$orderdate = "Purchased on: $day_ordered at $time_ordered\n";
 		fwrite($newreceipt, $orderdate);
 		echo "$orderdate";
+
+		echo "<br>";
+		echo "<br>";
+
 		
+
 		$ordered_byfname = $_SESSION['customer_fname'];
 		$ordered_bylname = $_SESSION['customer_lname'];
 		$ordername = "Purchased by: $ordered_byfname $ordered_bylname\n";
@@ -144,7 +180,11 @@ if (isset($_SESSION['customer_id'])) {
 		$subtotal = $total;
 		$subtotal = number_format($subtotal, 2);
 		echo "<tr>
+
+		<td colspan=\"3\" class='subtotal'>Subtotal</td>
+
 		<td colspan=\"3\">Subtotal</td>
+
 		<td>$$subtotal</td>
 		</tr>";
 		
@@ -155,7 +195,9 @@ if (isset($_SESSION['customer_id'])) {
 		$tax = $total * $tax_percent;
 		$tax = number_format($tax, 2);
 		echo "<tr>
-			<td colspan=\"3\">Tax</td>
+
+			<td colspan=\"3\">Tax (12%)</td>
+
 			<td>$$tax</td>
 			</tr>";
 			
@@ -168,8 +210,12 @@ if (isset($_SESSION['customer_id'])) {
 		fwrite($newreceipt, $total_price_str);
 		
 		echo "<tr>
-		<td colspan=\"3\">Total</td>
-		<td>$$total_price_display</td>
+
+
+		<td colspan=\"3\" id='total'><b>Total<b></td>
+
+		<td>$$total_price</td>
+
 		</tr>
 		</table>";
 		
@@ -184,8 +230,9 @@ if (isset($_SESSION['customer_id'])) {
 		echo "<br>";
 		echo "Order sent to: $address";
 		echo "<br>";
-		echo "$city, $province, $country";
+
 		echo "<br>";
+
 		echo "$postal";
 		echo "<br><br><br><br>";
 		
@@ -311,8 +358,7 @@ if (isset($_SESSION['customer_id'])) {
 		
 		echo "<br>";
 		echo "Order sent to: $address";
-		echo "<br>";
-		echo "<br>";
+
 		echo "$city, $province, $country";
 		echo "<br>";
 		echo "<br>";
@@ -320,10 +366,31 @@ if (isset($_SESSION['customer_id'])) {
 		echo "<br>";
 		echo "<br>";
 		echo "<input type='submit' onclick=\"window.location.href='order_history.php'\" value='Click here to view order history' id='orderbutton'>";
+
 		echo "<br>";
 		echo "<br>";
 		fclose($newreceipt);
 		echo '</div>';
+
+
+		echo "$city, $province, $country";
+		echo "<br>";
+		echo "<br>";
+		echo "$postal";
+
+		echo "<br>";
+		echo "<br>";
+		echo "<input type='submit' onclick=\"window.location.href='order_history.php'\" value='Click here to view order history' id='orderbutton'>";
+		echo "<br>";
+		echo "<br>";
+		fclose($newreceipt);
+		echo '</div>';
+
+
+			
+		fclose($newreceipt);
+		
+	
 
 		// Deleting cart from database
 		$delete_all = "DELETE from CART WHERE CUSTOMER_customer_id=".$_SESSION['customer_id'].";";
