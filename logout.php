@@ -7,7 +7,7 @@
 session_start();
 
 //stores last login in database
-/* if (isset($_SESSION['current_login_time'])){ */
+if (isset($_SESSION['customer_id'])){
 	include("mysqli_connect.php"); // $dbc connection set
 
 	$updateTimeStamp = "UPDATE CUSTOMER set customer_logintime =current_timestamp() WHERE customer_id =".$_SESSION['customer_id'].";";
@@ -21,7 +21,7 @@ session_start();
 	}
 
 	mysqli_close($dbc);
-/* } */
+}
 
 
 if (isset($_POST['declined_terms'])){
@@ -49,7 +49,7 @@ echo "<h1 align = 'center'>You have successfully logged out</h1><br>";
 echo  "<h2 align = 'center'>To log back in: <a href='login.php'>Click Here</a></h2>";
 if ($disabled){
 	echo "<p>Your account has been successfully disabled. If you wish to enable it, accept the terms and conditions after logging in</p>";
-} else{
+} elseif ($disabled){
 	echo "<p>There has been a problem while disabling your account. Please contact us via the email: lamaison.homeinterior@gmail.com</p>";
 }
 
