@@ -1,0 +1,76 @@
+td{
+padding:5px 5px 5px 5px;
+}
+#body{
+margin-left:25%;
+margin-right:25%;
+}
+#order_table{
+border-bottom:0px;
+border-left:0px;
+border-right:0px;
+border-top:0px; 
+
+}
+#name{
+border-bottom:0.5px solid black;
+border-right:0.5px solid black;
+}
+
+#price{
+border-bottom:0.5px solid black;
+border-right:0.5px solid black;
+border-left:0px;
+}
+#quantity{
+border-bottom:0.5px solid black;
+border-right:0.5px solid black;
+border-left:0px;
+}#subtotal{
+border-bottom:0.5px solid black;
+border-left:0px;
+}
+.subtotal{
+border-right:0.5px solid black;
+border-bottom:0.5px solid black;;
+}
+.productname{
+border-bottom:0.5px solid black;
+border-right:0.5px solid black;
+}
+.productprice{
+border-bottom:0.5px solid black;
+border-right:0.5px solid black;
+}
+.productquantity{
+border-bottom:0.5px solid black;
+border-right:0.5px solid black;
+}
+.producttotal{
+border-bottom:0.5px solid black;
+border-right:0.5px solid black;
+}
+#tax{
+border-bottom:0.5px solid black;
+border-right:0.5px solid black;
+}
+#total{
+border-right:0.5px solid black;
+border-bottom:0.5px solid black;
+border-bottom:0.5px solid black;
+}
+#taxrate{
+border-bottom:0.5px solid black;
+}
+#orderbutton{
+background-color: #ddd;
+border:0.5px solid black;
+color: black;
+padding: 10px 28px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+cursor: pointer;
+}
