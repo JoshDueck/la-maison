@@ -143,7 +143,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 		echo "<tr>";
 		echo "<td class=\"image_row\"><a href=\"product_details.php?product_id={$prod_row['product_id']}\"><img class=\"prod_imgs\" src=\"".$prod_row['product_image']."\"></a></td>";
 		echo "<td class=\"name_row\">$prod_name</td>";
-		echo "<td id='price{$prod_row['product_id']}'>$ ".$prod_row['product_price']."</td>";
+		echo "<td id='price{$prod_row['product_id']}'>$".number_format($prod_row['product_price'], 2)."</td>";
 		echo "<td>";
 	
 		// start of update quantities form
@@ -167,13 +167,13 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 		echo "</form>"; // end of update quantities form
 	
 			echo "</td>";
-
-		echo "<td class=\"subtotal\" id=\"subtotal{$prod_row['product_id']}\"> \$ $subtotal";		
+		
+		echo "<td class=\"subtotal\" id=\"subtotal{$prod_row['product_id']}\"> \$".number_format($subtotal, 2)."";		
 		// remove from cart using GET
 		echo "<td><a href='shopping_cart.php?product_id={$prod_row['product_id']}' style='text-decoration:none;'>Remove</a></td>";
-
+		
 		echo "</tr>";
-	
+		
 		
 	}
 	echo "</table>";
@@ -181,12 +181,13 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 	$tax_percent = 0.12;
 	$taxed_total = $total * (1+ $tax_percent);
 	$taxed_total = number_format($taxed_total, 2);
+	$total = number_format($total, 2);
 	// start of floating_total div
 	echo "<div id='floating_total'>
 		
 			<p id='total'>Subtotal: \$$total <br/>
-						Tax (12%) <br/>
-						Total: \$$taxed_total
+							Tax (12%) <br/>
+							Total: \$$taxed_total
 			</p>
 			
 			
@@ -204,7 +205,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 				data-description="Access for a year"
 				data-amount="<?php echo "$stripeamount" ?>"
 				data-locale="auto"></script>
-			<input type="hidden" name="totalamt" value="<?php echo "$taxed_total" ?>">
+			<input type="hidden" name="totalamt" value="<?php echo "$stripeamount" ?>">
 		</form>
 		
 		
@@ -219,8 +220,9 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 	echo "<h1 align='center'>Your shopping cart is empty.<br><br><a href='index.php'><input type='button' class='link1' value='Continue shopping'></a></h1>";
 }
 
-mysqli_close($dbc);
+echo "<br><br><br><br>";
 
+mysqli_close($dbc);
 include("includes/footer.html");
 
 echo "<div id='bottom_space'></div>";
