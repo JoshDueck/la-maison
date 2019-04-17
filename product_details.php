@@ -129,6 +129,10 @@ mysqli_close($dbc);
 ?>
 	
 </article>
+<br>
+<br>
+<br>
+<br>
 
 <?php
 

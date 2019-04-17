@@ -21,14 +21,12 @@ if (isset($_SESSION['customer_id'])) {
 	$token  = $_POST['stripeToken'];
 	$totalamt = $_POST['totalamt'];
 
-	echo "Total amt: $totalamt";
+
 	$customer = \Stripe\Customer::create(array(
 		'email' => $email,
 		'source'  => $token
 	));
 
-	
-	$totalamt *= 100;
 	
   $charge = \Stripe\Charge::create(array(
       'customer' => $customer->id,
@@ -125,18 +123,21 @@ if (isset($_SESSION['customer_id'])) {
 			$prod_name = $prod_row['product_name'];
 			$prod_quantity = $prod_row['quantity'];
 			$prod_price = $prod_row['product_price'] * $prod_quantity;
+			$prod_price_display = number_format($prod_price, 2);
 			$prod_price_per = $prod_row['product_price'];
-			$orderproducts = "Product: $prod_name \nAmount purchased: $prod_quantity for $$prod_price\n\n";
+			$prod_price_per_display = number_format($prod_price_per, 2);
+			$orderproducts = "Product: $prod_name \nAmount purchased: $prod_quantity for $$prod_price_display\n\n";
 			fwrite($newreceipt, $orderproducts);
 			echo "<tr>
-			<td id='productname'>$prod_name</td>
-			<td id='productprice'>$$prod_price_per</td>
-			<td id='productquantity'>$prod_quantity</td>
-			<td id='producttotal'>$$prod_price</td>
+			<td class='productname'>$prod_name</td>
+			<td class='productprice'>$$prod_price_per_display</td>
+			<td class='productquantity'>$prod_quantity</td>
+			<td class='producttotal'>$$prod_price_display</td>
 			</tr>";
 			$total = $total+$prod_price;
 		} 
 		$subtotal = $total;
+		$subtotal = number_format($subtotal, 2);
 		echo "<tr>
 		<td colspan=\"3\">Subtotal</td>
 		<td>$$subtotal</td>
@@ -157,12 +158,13 @@ if (isset($_SESSION['customer_id'])) {
 		fwrite($newreceipt, $tax_str);
 		
 		$total_price = $total+$tax;
-		$total_price_str = "Total cost: $$total_price \n";
+		$total_price_display = number_format($total_price, 2);
+		$total_price_str = "Total cost: $$total_price_display \n";
 		fwrite($newreceipt, $total_price_str);
 		
 		echo "<tr>
 		<td colspan=\"3\">Total</td>
-		<td>$$total_price</td>
+		<td>$$total_price_display</td>
 		</tr>
 		</table>";
 		
@@ -180,37 +182,10 @@ if (isset($_SESSION['customer_id'])) {
 		echo "$city, $province, $country";
 		echo "<br>";
 		echo "$postal";
-			
+		echo "<br><br><br><br>";
+		
 		fclose($newreceipt);
 		
-		/*
-		$total2 = 0;
-		echo "<br>";
-		echo "$ordernum";
-		echo "<br>";
-		echo "$orderdate";
-		echo "<br>";
-		echo "$ordername";
-		echo "<br>";
-		while ($prod_row=mysqli_fetch_array($row2, MYSQLI_ASSOC)) {
-			$prod_name = $prod_row['product_name'];
-			$prod_quantity = $prod_row['quantity'];
-			$prod_price = $prod_row['product_price'] * $prod_quantity;
-			echo "PRODUCT: $prod_name";
-			echo "<br>";
-			echo "AMOUNT PURCHASED: $prod_quantity for $$prod_price";
-			echo "<br>";
-			echo "<br>";
-			$total2 = $total2+$prod_price;
-		}
-		echo "TOTAL AMOUNT: $total2 <br> hello";
-		echo "<br>";
-		echo "$address";
-		echo "<br>";
-		echo "$city, $province, $country";
-		echo "<br>";
-		echo "$postal";
-		*/
 		// Deleting cart from database
 		$delete_all = "DELETE from CART WHERE CUSTOMER_customer_id=".$_SESSION['customer_id'].";";
 		mysqli_query($dbc, $delete_all);
@@ -220,6 +195,7 @@ if (isset($_SESSION['customer_id'])) {
 	<h3>You have to be logged in to access this page.</h3>
 	";
 }
+
 	mysqli_close($dbc);
   include ('includes/footer.html');
 ?>
