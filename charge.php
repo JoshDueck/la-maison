@@ -12,7 +12,7 @@ if (isset($_SESSION['customer_id'])) {
 					echo '<pre>';
 					var_dump($_SESSION);
 					echo '</pre>';
-<<<<<<< HEAD
+
 
 					echo '<pre>';
 					var_dump($_POST);
