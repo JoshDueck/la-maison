@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="includes/products_display.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="includes/index.css" type="text/css" media="screen" />
 <head>
-</head><body><br>
+</head><body>
 
 <?php
 
