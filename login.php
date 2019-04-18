@@ -27,8 +27,7 @@ include("includes/head.php");
      <br>  
 	 <br>
     <button type="submit">Log In</button>
-	<br>
-	<br>
+
 	<br>
 	<p>Not already a member?
 	<a href="create_account.php">Click here to create an account.</a>
