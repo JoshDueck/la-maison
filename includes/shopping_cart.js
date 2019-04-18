@@ -3,7 +3,7 @@ $(document).ready(function(){
 /*### start of increment_btn and decrement_btn ###*/
 	
 	// prod
-	$("#decrement_btn0").click(function (){$decrement("#quantity0");});
+	$("#decrement_btn0").click(function(){$decrement("#quantity0");});
 	$("#decrement_btn1").click(function(){$decrement("#quantity1");});
 	$("#decrement_btn2").click(function(){$decrement("#quantity2");});
 	$("#decrement_btn3").click(function(){$decrement("#quantity3");});
@@ -80,7 +80,9 @@ $(document).ready(function(){
 				$total += $subtotal;
 			}
 		}
+		$("#totalamt").val($total.toFixed(2));
 		$("#total").html("Total: \$" + $total.toFixed(2));
+		
 	}
 
 
