@@ -23,7 +23,7 @@ function formValidation() {
 		/* first name */
 	if ($firstnameRe.test($firstname) == false) {
 
-		alert ("Error: Provide your first name in valid format");
+		alert ("Please enter your first name by using alphabetical letters.");
 		$("#firstname").focus();
 		return false;
 	}
@@ -31,7 +31,7 @@ function formValidation() {
 		/* last name */
 	if ($lastnameRe.test($lastname) == false) {
 
-		alert ("Error: Provide your last name in valid format");
+		alert ("Please enter your last name by using alphabetical letters");
 		$("#lastname").focus();
 		return false;
 	}
@@ -39,7 +39,7 @@ function formValidation() {
 		/* address */
 	if ($addressRe.test($address) == false) {
 
-		alert ("Error: Provide your address in valid format");
+		alert ("Please enter your address");
 		$("#address").focus();
 		return false;
 	}
@@ -47,28 +47,28 @@ function formValidation() {
 		/* city */
 	if ($cityRe.test($city) == false) {
 
-		alert ("Error: Provide your city in valid format");
+		alert ("Please enter your city");
 		$("#city").focus();
 		return false;
 	}
 		/* province */
 	if ($provinceRe.test($province) == false) {
 
-		alert ("Error: Provide your province in valid format");
+		alert ("Please enter your province");
 		$("#province").focus();
 		return false;
 	}
 		/* country */
 	if ($countryRe.test($country) == false) {
 
-		alert ("Error: Provide your country in valid format");
+		alert ("Please enter your country");
 		$("#country").focus();
 		return false;
 	}
 		/*Postal*/
 	if ($postalRe.test($postal) == false) {
 
-		alert ("Error: Provide your postal code in valid format");
+		alert ("Please enter your postal code in valid format");
 		$("#postal").focus();
 		return false;
 	}
@@ -76,7 +76,7 @@ function formValidation() {
 		/*Email*/
 	if ($emailRe.test($email) == false) {
 
-		alert("Error: Email couldn't be verified");
+		alert("Please enter your email address");
 		$("#customer_email").focus();
 		return false;
 	}
@@ -84,13 +84,13 @@ function formValidation() {
 		/*Password*/
 	if ($password.length < 6) {
 
-		alert("Error: Enter a password of at least 6 digits");
+		alert("Please enter your password");
 		$("#password").focus();
 		return false;
 	}
 	if ($password_repeat.length < 6) {
 
-		alert("Error: Enter a password of at least 6 digits");
+		alert("Please type your password again");
 		$("#password_repeat").focus();
 		return false;
 	}
