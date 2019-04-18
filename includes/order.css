@@ -47,10 +47,12 @@ p{
 .product_name{
 
 	padding-right:60px;
+	
 	/*padding:0px 0px 0px 0px;*/
 }
 b.product_name{
 max-width: 100px;	
+vertical-align:75px;
 }
 .img{
 	height:150px;
@@ -69,8 +71,10 @@ max-width: 100px;
 .purchase_price{
 padding-left:70px;
 padding-right:70px;
+vertical-align:75px;
 }
 .quantity{
 padding-left:70px;
 padding-right:70px;
+vertical-align:75px;
 }
