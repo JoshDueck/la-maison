@@ -7,7 +7,8 @@
 	<script src="includes/order.js"></script>
 </head>
 <body>
-
+ <div id = "page-container">
+	<div id = "content-wrap">
 <?php
 session_start();
 
@@ -108,6 +109,7 @@ if(isset($_SESSION['customer_id']) && ($history_rows > 0)) {
 
 mysqli_close($dbc);
 ?>
+<<<<<<< HEAD
 
 <br>
 <br>
@@ -115,9 +117,14 @@ mysqli_close($dbc);
 <br>
 
 
+=======
+</div>
+<footer id="footer">
+>>>>>>> sticky footer
 <?php
 include("includes/footer.html");
 ?>
+</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
 	<script src="includes/order.js"></script>
 
