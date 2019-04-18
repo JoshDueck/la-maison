@@ -6,7 +6,8 @@
 <link rel="stylesheet" href="includes/shopping_cart.css" type="text/css" media="screen" />
 </head>
 <body>
-
+ <div id = "page-container">
+	<div id = "content-wrap">
 <?php
 session_start();
 /*
@@ -23,7 +24,7 @@ include("includes/head.php");
 if(!(isset($_SESSION['customer_id'])&&$_SESSION['customer_id']!='')){
 		header("Location:includes/login.php");
 
-		echo "<h1 >You are not logged in. <a href='login.php'>Login please</a></h1>"; 
+		echo "<h1 align = center>You are not logged in. <a href='login.php'>Login please</a></h1>"; 
 }
 	
 // connect to the database
@@ -219,12 +220,15 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 	echo "<h1 align='center'>Your shopping cart is empty.<br><br><a href='index.php'><input type='button' class='link1' value='Continue shopping'></a></h1>";
 }
 
-
-include("includes/footer.html");
-
 echo "<div id='bottom_space'></div>";
 
 ?>
+</div>
+<footer id="footer">
+<?php
+include("includes/footer.html");
+?>
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="includes/shopping_cart.js"></script>
