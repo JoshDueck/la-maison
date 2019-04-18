@@ -1,5 +1,7 @@
 
-
+body{
+	margin: 0px;
+}
 /* The Modal (background) */
 .modal {
   display: block; /* Hidden by default */

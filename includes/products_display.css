@@ -1,3 +1,6 @@
+body{
+	margin: 0px;
+}
 .img{
 	height:225px;
 	width:225px;
@@ -6,6 +9,7 @@
 .text{
 	font-family:Times New Roman;
 }
+
 
 #page-container {
 	position: relative;
@@ -24,6 +28,10 @@
 }
 
 
+td.shadow{
+max-width:225;
+}
+
 table {
 	margin: auto;
 }
@@ -33,13 +41,12 @@ table {
 	grid-gap: 10px;
 }
 .shadow{
-	padding:10px;
+	padding:10px 10px 10px 10px;
 }
 
 .shadow:hover{
 	background-color:#ddd;	
-	padding:10px;
-}
+	}
 a .text{
 	font-family:Times New Roman;
 	color: black;

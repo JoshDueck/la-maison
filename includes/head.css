@@ -1,5 +1,7 @@
 /*search.css*/
-
+body{
+	margin: 0px;
+}
 #search_pic{
 margin-top:28px;
 width:35px;
@@ -71,10 +73,7 @@ margin:0px 0px 0px 0px;
   font-weight: bold;
 }
 
-.header a:hover {
-  background-color: #ddd;
-  color: white;
-}
+
 
 .header a.active {
   background-color: #fcf9ed;
@@ -140,6 +139,7 @@ margin:0.2em auto;
     background-image: linear-gradient(purple, black);
 	font-family: Arial, Helvetica, sans-serif;
 	height: 46px;
+	border-bottom:1px solid black;
 }
 
 .navbar a {
