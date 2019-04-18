@@ -120,7 +120,8 @@ $result = mysqli_query($dbc, $query);
 			";
 			$proddesc = str_replace("\\n","<br />",$prod_row['product_description']);
 			$proddesc = str_replace("\"\"","\"",$proddesc);
-			echo str_replace("\\t-","&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp• ",$proddesc);
+			$proddesc = str_replace("\\t-","&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp• ",$proddesc);
+			echo str_replace(" • ","<br />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp• ",$proddesc);
 			echo "</p></div> <!-- end of description_container -->
 			";
 		

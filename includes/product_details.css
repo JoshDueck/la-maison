@@ -50,11 +50,21 @@ img {
 #price_container {
 	
 }
+#increment_btn{
+background-color:#75b6dc;
 
+}
+#decrement_btn{
+background-color:#75b6dc;
+
+}
 #buttons_container input, button{
 	font-size: 20px;
 	margin-top: 10px;
-}
+	border-radius: 5px;
+	border:0.5px solid gray;
+	padding:8px;
+	}
 
 #buttons_container button{
 	font-size: 20px;
