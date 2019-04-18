@@ -14,13 +14,14 @@ if (isset($_SESSION['customer_id'])){
 	include("mysqli_connect.php"); // $dbc connection set
 
 	$updateTimeStamp = "UPDATE CUSTOMER set customer_logintime =current_timestamp() WHERE customer_id =".$_SESSION['customer_id'].";";
+	
 	if ($result = mysqli_query($dbc, $updateTimeStamp)){
 		/* echo "login time saved to database"; */
 	}else {
-	echo "<p>The attempted query is: ".$updateTimeStamp."</p>";
-		echo "Error: ".mysqli_error($dbc);
-		$desc = "desc CUSTOMER";
-		echo "Fields are: ".mysqli_query($dbc, $updateTimeStamp);
+		//echo "<p>The attempted query is: ".$updateTimeStamp."</p>";
+		//echo "Error: ".mysqli_error($dbc);
+		//$desc = "desc CUSTOMER";
+		//echo "Fields are: ".mysqli_query($dbc, $updateTimeStamp);
 	}
 
 	mysqli_close($dbc);
@@ -32,11 +33,12 @@ if (isset($_POST['declined_terms'])){
 	
 	$updateTerms = "UPDATE CUSTOMER set customer_policy=false WHERE customer_id =".$_SESSION['customer_id'].";";
 	
+	$disabled = null;
 	if ($result = mysqli_query($dbc, $updateTerms)){
 		$disabled = true;
 	} else{
 		echo "Error: ".mysqli_error($dbc);
-		$disabled = true;
+		$disabled = false;
 	}
 
 	mysqli_close($dbc);
@@ -50,10 +52,8 @@ include("includes/head.php");
  echo "<br>";
 echo "<h1 align = 'center'>You have successfully logged out</h1><br>";
 echo  "<h2 align = 'center'>To log back in: <a href='login.php'>Click Here</a></h2>";
-if ($disabled){
+if ($disabled == true){
 	echo "<p>Your account has been successfully disabled. If you wish to enable it, accept the terms and conditions after logging in</p>";
-} elseif ($disabled){
-	echo "<p>There has been a problem while disabling your account. Please contact us via the email: lamaison.homeinterior@gmail.com</p>";
 }
 ?>
 </div>
