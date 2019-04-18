@@ -15,6 +15,8 @@ else {
 <link rel="stylesheet" href="includes/addproduct.css" type="text/css" media="screen" />
 </head>
 <body>
+ <div id = "page-container">
+	<div id = "content-wrap">
 <?php
 
 include("includes/head.php");
@@ -251,12 +253,13 @@ mysqli_close($dbc);
 	<br>
 </form> 
 </div>
-
+</div>
+<footer id="footer">
 <?php
 	}
-
-include('includes/footer.html');
+include("includes/footer.html");
 ?>
+</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="includes/addproduct.js"></script>
 </body>
