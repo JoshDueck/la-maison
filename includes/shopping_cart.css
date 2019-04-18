@@ -12,6 +12,21 @@ margin:0px 0px 0px 0px;
 padding:5px;
 
 }
+/* #page-container {
+	position: relative;
+	min-height: 100vh;
+}
+
+#content-wrap {
+	padding-bottom: 2.5rem;
+}
+
+#footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 2.5rem;
+} */
 #remove{
 padding: 8px 8px 8px 8px;
 border:0.5px solid black;
@@ -83,8 +98,8 @@ margin:0.4em auto;
 .link1{
 position:center;
 border-radius:10px;
-background-image: linear-gradient(purple, black, purple);
-color:white;
+background-image: linear-gradient(#5fb2ce, #c0e1ec, #5fb2ce);
+color:darkblue;
 font-weight:bold;
 border-color: 1px solid black;
 font-size:15px;
