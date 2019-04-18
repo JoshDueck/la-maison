@@ -109,7 +109,6 @@ if(isset($_SESSION['customer_id']) && ($history_rows > 0)) {
 
 mysqli_close($dbc);
 ?>
-
 </div>
 <footer id="footer">
 <?php
