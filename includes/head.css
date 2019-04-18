@@ -172,7 +172,6 @@ margin:0.2em auto;
  
 }
 
-
 .navbar li {
 	float: left;
 	display: block;
@@ -180,10 +179,8 @@ margin:0.2em auto;
 
 
 .subnav {	
-
 float: left;
  background-color: #75b6dc; 
-
   padding:auto;
   width: 220px;
   height: 47px;

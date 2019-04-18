@@ -38,6 +38,8 @@ include("mysqli_connect.php");
 		<td align="left" width="20%"><b>Product Name</b></td>
 		<td align="left" width="20%"><b>Product Price</b></td>
 		<td align="left" width="50%"><b>Description</b></td>
+		<td align="center" width="10%"><b>Action</b></td>
+
 	</tr>';
 	
 	$r = mysqli_query ($dbc, $q);
@@ -49,6 +51,8 @@ include("mysqli_connect.php");
 			<td align=\"left\">{$row['product_name']}</td>
 			<td align=\"left\">\${$row['product_price']}</td>
 			<td align=\"left\">{$row['product_description']}</td>
+			<td align=\"right\"><a href=\"edit_tree.php?treeid={$row['product_id']}\">EDIT</a></td>
+			<td align=\"right\"><a href=\"delete_tree.php?treeid={$row['product_id']}\">DELETE</a></td>
 		</tr>\n";
 		
 
@@ -237,7 +241,7 @@ mysqli_close($dbc);
 	<br>
 	
 	Product Price:<br>
-	<input type="number" name="prodprice" id="prodprice" step=".01">
+	<input type="number" name="prodprice" id="prodprice">
 	<br>
 	<br>
 	Product Image:<br>
