@@ -1,4 +1,5 @@
 *{box-sizing: border-box;}
+
  body{
 	 opacity: 1;
  background-image: url("background.jpg");
@@ -10,21 +11,22 @@
   -o-background-size: cover;
   background-size: cover;
 }
-
-
-.header{
-	background-color:#ffe0bd	;
-  border: none;
-  color: black;
-  width: 80%;
-  padding: 16px 32px;
-  text-align: center;
-  font-size: 40px;
-  margin: 4px 2px;
-  opacity: 0.8;
-  transition: 0.3s;
-  margin: auto;
+#page-container {
+	position: relative;
+	min-height: 100vh;
 }
+
+#content-wrap {
+	padding-bottom: 2.5rem;
+}
+
+#footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 2.5rem;
+}
+
 
 #buttons-parent{
 	margin:auto;
@@ -109,7 +111,7 @@ background-color:#DCDCDC;
 margin:auto;
 }
 .modal-content{
-	background: #fcf9ed;
+	background: #B7D8F1;
 	padding:1%;
 	border:1px solid black;
 	width: 50%;
