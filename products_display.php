@@ -20,6 +20,8 @@ if (isset($_SESSION['customer_id'])) {
 <link rel="stylesheet" href="includes/products_display.css" type="text/css" media="screen" />
 <head>
 </head><body>
+ <div id = "page-container">
+	<div id = "content-wrap">
 
 <?php
 include("includes/head.php"); // inserts header at the top
@@ -96,9 +98,12 @@ echo "</tr>
 	
 mysqli_close($dbc);
 	
-include("includes/footer.html");
-
 ?>
-
+</div>
+<footer id="footer">
+<?php
+include("includes/footer.html");
+?>
+</div>
 </body>
 </html>
