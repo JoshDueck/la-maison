@@ -1,4 +1,5 @@
 *{box-sizing: border-box;}
+
  body{
 	 opacity: 1;
  background-image: url("background.jpg");
@@ -12,19 +13,6 @@
 }
 
 
-.header{
-	background-color:#ffe0bd	;
-  border: none;
-  color: black;
-  width: 80%;
-  padding: 16px 32px;
-  text-align: center;
-  font-size: 40px;
-  margin: 4px 2px;
-  opacity: 0.8;
-  transition: 0.3s;
-  margin: auto;
-}
 
 #buttons-parent{
 	margin:auto;
@@ -109,7 +97,7 @@ background-color:#DCDCDC;
 margin:auto;
 }
 .modal-content{
-	background: #fcf9ed;
+	background: #B7D8F1;
 	padding:1%;
 	border:1px solid black;
 	width: 50%;
