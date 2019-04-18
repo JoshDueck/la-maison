@@ -27,15 +27,17 @@ if (isset($_SESSION['customer_id'])) {
 		'source'  => $token
 	));
 
-	
-  $charge = \Stripe\Charge::create(array(
-      'customer' => $customer->id,
-      'amount'   => $totalamt,
-      'currency' => 'cad'
-  ));
+	$totalamt *= 100;
+	$charge = \Stripe\Charge::create(array(
+		'customer' => $customer->id,
+		'amount'   => $totalamt,
+		'currency' => 'cad'
+	));
   
 	$amount = number_format(($totalamt / 100), 2);
-	echo '<h3>Your purchase of $'.$amount.'was successful.</h3>Thank you for shopping at La Maison';
+
+	echo '<h3>Your purchase of $'.$amount.'  was successful</h3><h2>Thank you for shopping at La Maison</h2>';
+
 	// query to delete the cart:
 	  
 	  
@@ -91,13 +93,11 @@ if (isset($_SESSION['customer_id'])) {
 		//
 		echo "<table id=\"order_table\" border='1'>
 			<tr id='titles'>
-			<td id='name'>Name</td>
-			<td id='price'>Price</td>
-			<td id='quantity'>Quantity</td>
-			<td id='total'>Total</td>
+			<td id='name'><b>Name</b></td>
+			<td id='price'><b>Price</b></td>
+			<td id='quantity'><b>Quantity</b></td>
+			<td id='total'><b>Total</b></td>
 			</tr>";
-
-
 
 
 		echo "<br>";
@@ -139,7 +139,7 @@ if (isset($_SESSION['customer_id'])) {
 		$subtotal = $total;
 		$subtotal = number_format($subtotal, 2);
 		echo "<tr>
-		<td colspan=\"3\">Subtotal</td>
+		<td colspan=\"3\" class='subtotal'>Subtotal</td>
 		<td>$$subtotal</td>
 		</tr>";
 		
@@ -182,13 +182,19 @@ if (isset($_SESSION['customer_id'])) {
 		echo "$city, $province, $country";
 		echo "<br>";
 		echo "$postal";
-		echo "<br><br><br><br>";
-		
+
+		echo "<br>";
+		echo "<br>";
+		echo "<input type='submit' onclick=\"window.location.href='order_history.php'\" value='Click here to view order history' id='orderbutton'>";
+		echo "<br>";
+		echo "<br>";
+
 		fclose($newreceipt);
 		
 		// Deleting cart from database
 		$delete_all = "DELETE from CART WHERE CUSTOMER_customer_id=".$_SESSION['customer_id'].";";
 		mysqli_query($dbc, $delete_all);
+		echo "<br><br><br><br>";
 	}
 } else{
 	echo "
@@ -197,6 +203,6 @@ if (isset($_SESSION['customer_id'])) {
 }
 
 	mysqli_close($dbc);
-  include ('includes/footer.html');
+	include ('includes/footer.html');
 ?>
 </html>
