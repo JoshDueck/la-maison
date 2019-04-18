@@ -1,8 +1,11 @@
 <html>
+<link rel="stylesheet" href="includes/logout.css" type="text/css" media="screen" />
 <title>Logout</title>
 <head>
 </head>
 <body>
+ <div id = "page-container">
+	<div id = "content-wrap">
 <?php
 session_start();
 
@@ -52,8 +55,12 @@ if ($disabled){
 } else{
 	echo "<p>There has been a problem while disabling your account. Please contact us via the email: lamaison.homeinterior@gmail.com</p>";
 }
-
-include('includes/footer.html');
 ?>
+</div>
+<footer id="footer">
+<?php
+include("includes/footer.html");
+?>
+</div>
 </body>
 </html>
