@@ -109,18 +109,9 @@ if(isset($_SESSION['customer_id']) && ($history_rows > 0)) {
 
 mysqli_close($dbc);
 ?>
-<<<<<<< HEAD
 
-<br>
-<br>
-<br>
-<br>
-
-
-=======
 </div>
 <footer id="footer">
->>>>>>> sticky footer
 <?php
 include("includes/footer.html");
 ?>
