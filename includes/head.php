@@ -4,13 +4,13 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body >
+<body>
 <?php
 session_start();
 ?>
-<div class="header" background="headbg.jpeg" >
+<div class="header">
 <div >
-  <a href="index.php" class="logo"><h3 id="logo">LA MAISON</h3></a>
+  <a href="index.php" class="logo"><h3 id="logo">La Maison</h3></a>
   <h3 class="right-top">
 	<?php 
 	if (isset($_SESSION['customer_id'])) { 
@@ -26,7 +26,7 @@ session_start();
 	<br>
 	<br>
   <div class="searchbar">
-  <input class="topnav" type="text" id="top" placeholder="Search here"><img id="search_pic" src="search.jpg">
+  
 <?php
 	if (isset($_SESSION['customer_id'])) { // checking if user is logged in
 ?>
