@@ -86,11 +86,6 @@ echo "
 	}
 	
 	echo "
-	if ($email_in_use == true){
-		echo "<p>Email is already in use. Try <a href=\"login.php\">logging in.</a></p>";
-	}
-	
-	echo "
 
   <form class=\"modal-content\" action=\"create_account.php\" method=\"POST\" onSubmit=\"return formValidation()\">
 
@@ -127,26 +122,8 @@ echo "
 
       <label for=\"password-repeat\"><b>Confirm password:</b></label>
       <input type=\"password\" placeholder=\"Re-type password\" class=\"search\" id=\"password_repeat\" name=\"password_repeat\">
-
-      <br>
-	  <br><input type=\"hidden\" id=\"create_account\" name=\"create_account\" value=\"true\">
-	      <button type=\"submit\" class= \"btn\" name=\"submit\" id=\"submit\"> Create Account </button>
-		 
-	<br>
-	<br>
-	<button type=\"button\" class=\"cancelbtn\" id=\"cancel\">Cancel</button> 
-	<br>
-	<br>
-		<p><input type=\"checkbox\" id=\"customer_policy\" name=\"customer_policy\" value=\"1\" required>To create an account you must agree to the <a href=\"includes/terms.php\">Terms and Conditions</a></p>
-	<br>	 
-
-      <label for=\"password\"><b>Password:</b></label>
-      <input type=\"password\" placeholder=\"password\" class=\"search\" id=\"password\" name=\"password\">
-
-      <label for=\"password-repeat\"><b>Confirm password:</b></label>
-      <input type=\"password\" placeholder=\"Re-type password\" class=\"search\" id=\"password_repeat\" name=\"password_repeat\">
 	  
-	  <input type=\"checkbox\" id=\"customer_policy\" name=\"customer_policy\" value=\"1\" required>To create an account you must agree to the <a href=\"includes/terms.php\">Terms and Conditions</a>
+	  <input align = 'center' type=\"checkbox\" id=\"customer_policy\" name=\"customer_policy\" value=\"1\" required>To create an account you must agree to the <a href=\"includes/terms.php\">Terms and Conditions</a>
 	  
 	  <br><input type=\"hidden\" id=\"create_account\" name=\"create_account\" value=\"true\">
 	  

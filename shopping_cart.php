@@ -6,8 +6,7 @@
 <link rel="stylesheet" href="includes/shopping_cart.css" type="text/css" media="screen" />
 </head>
 <body>
- <div id = "page-container">
-	<div id = "content-wrap">
+
 <?php
 session_start();
 /*
@@ -223,12 +222,7 @@ if(isset($_SESSION['customer_id']) && ($prod_row >0)){
 echo "<div id='bottom_space'></div>";
 
 ?>
-</div>
-<footer id="footer">
-<?php
-include("includes/footer.html");
-?>
-</div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="includes/shopping_cart.js"></script>
