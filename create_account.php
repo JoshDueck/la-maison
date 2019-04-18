@@ -91,7 +91,6 @@ echo "
 	}
 	
 	echo "
-	
 
   <form class=\"modal-content\" action=\"create_account.php\" method=\"POST\" onSubmit=\"return formValidation()\">
 
@@ -140,6 +139,12 @@ echo "
 	<br>
 		<p><input type=\"checkbox\" id=\"customer_policy\" name=\"customer_policy\" value=\"1\" required>To create an account you must agree to the <a href=\"includes/terms.php\">Terms and Conditions</a></p>
 	<br>	 
+
+      <label for=\"password\"><b>Password:</b></label>
+      <input type=\"password\" placeholder=\"password\" class=\"search\" id=\"password\" name=\"password\">
+
+      <label for=\"password-repeat\"><b>Confirm password:</b></label>
+      <input type=\"password\" placeholder=\"Re-type password\" class=\"search\" id=\"password_repeat\" name=\"password_repeat\">
 	  
 	  <input type=\"checkbox\" id=\"customer_policy\" name=\"customer_policy\" value=\"1\" required>To create an account you must agree to the <a href=\"includes/terms.php\">Terms and Conditions</a>
 	  
